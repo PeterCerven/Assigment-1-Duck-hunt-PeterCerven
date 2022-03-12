@@ -1,4 +1,6 @@
 package sk.stuba.fei.uim.oop.cards;
 
-public class Card {
+public abstract class Card {
+    public Card() {
+    }
 }
