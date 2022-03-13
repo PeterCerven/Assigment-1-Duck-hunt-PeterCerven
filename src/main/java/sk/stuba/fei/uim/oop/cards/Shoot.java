@@ -1,4 +1,4 @@
 package sk.stuba.fei.uim.oop.cards;
 
-public class SpecialCard {
+public class Shoot {
 }
