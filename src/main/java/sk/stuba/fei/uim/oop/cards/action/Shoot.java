@@ -1,4 +1,8 @@
 package sk.stuba.fei.uim.oop.cards.action;
 
-public class Shoot {
+public class Shoot extends ActionCard{
+    @Override
+    public void action() {
+
+    }
 }

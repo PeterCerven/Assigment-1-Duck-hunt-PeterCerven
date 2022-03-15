@@ -3,6 +3,7 @@ package sk.stuba.fei.uim.oop.game;
 import sk.stuba.fei.uim.oop.cards.action.ActionCard;
 import sk.stuba.fei.uim.oop.cards.nonaction.Duck;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
+import sk.stuba.fei.uim.oop.game.DeckCards;
 
 import java.util.ArrayList;
 
