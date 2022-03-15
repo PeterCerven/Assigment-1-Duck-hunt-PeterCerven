@@ -6,7 +6,6 @@ import sk.stuba.fei.uim.oop.cards.nonaction.EmptyWater;
 import sk.stuba.fei.uim.oop.cards.nonaction.Duck;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-import java.util.AbstractList.*;
 
 
 import java.util.ArrayList;
@@ -34,6 +33,7 @@ public class GameBoard {
         board = new ArrayList<NonActionCard>();
         this.initializeDecks();
         this.initializeBoard();
+        this.initializeHands();
         this.gameStart();
     }
 
@@ -91,6 +91,15 @@ public class GameBoard {
             this.board.add(this.boardDeck.get(i));
         }
         this.boardDeck.subList(0, 5).clear();
+    }
+
+    private void initializeHands(){
+        for (Player player: players){
+            for (int i = 0; i < 3; i++) {
+                player.cardsToUse.add(this.actionDeck.get(0));
+                this.actionDeck.remove(0);
+            }
+        }
     }
 
     private void gameStart() {

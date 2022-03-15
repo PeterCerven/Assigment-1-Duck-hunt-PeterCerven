@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Player {
     public final String name;
     private boolean active;
-    private ArrayList<ActionCard> cardsToUse;
+    public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
 
     public Player(String name){
