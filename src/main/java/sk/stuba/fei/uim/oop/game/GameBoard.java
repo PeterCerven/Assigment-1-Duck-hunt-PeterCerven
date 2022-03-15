@@ -3,23 +3,23 @@ package sk.stuba.fei.uim.oop.game;
 
 import sk.stuba.fei.uim.oop.cards.action.*;
 import sk.stuba.fei.uim.oop.cards.nonaction.EmptyWater;
-import sk.stuba.fei.uim.oop.game.Player;
 import sk.stuba.fei.uim.oop.cards.nonaction.Duck;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-import sk.stuba.fei.uim.oop.game.DeckCards;
+import java.util.AbstractList.*;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class GameBoard {
     private Player[] players;
     private int currentPlayer;
     private int roundCounter;
-    public ArrayList<NonActionCard> boardDeck;
-    public ArrayList<ActionCard> actionDeck;
+    private ArrayList<NonActionCard> boardDeck;
+    private ArrayList<ActionCard> actionDeck;
+    private ArrayList<NonActionCard> board;
+
 
 
     public GameBoard() {
@@ -30,9 +30,11 @@ public class GameBoard {
             this.players[i] = new Player(ZKlavesnice.readString("Enter PLAYER " + (i + 1) + " name:"));
         }
         boardDeck = new ArrayList<NonActionCard>();
+        actionDeck = new ArrayList<ActionCard>();
+        board = new ArrayList<NonActionCard>();
         this.initializeDecks();
+        this.initializeBoard();
         this.gameStart();
-
     }
 
     public void fillNonActionDeck(int numCards, NonActionCard card){
@@ -48,6 +50,8 @@ public class GameBoard {
     }
 
     private void initializeDecks() {
+
+        //filling deck of non action cards
         for (Player player : players) {
             Duck duck = new Duck(player.name);
             fillNonActionDeck(5, duck);
@@ -57,7 +61,7 @@ public class GameBoard {
 
         Collections.shuffle(this.boardDeck);
 
-
+        //filing deck of action cards
         Aim aim = new Aim();
         fillActionDeck(10, aim);
 
@@ -81,7 +85,12 @@ public class GameBoard {
 
         Collections.shuffle(this.actionDeck);
 
-
+    }
+    public void initializeBoard(){
+        for (int i = 0; i < 6; i++){
+            this.board.add(this.boardDeck.get(i));
+        }
+        this.boardDeck.subList(0, 5).clear();
     }
 
     private void gameStart() {
