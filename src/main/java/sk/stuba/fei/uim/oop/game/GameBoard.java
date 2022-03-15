@@ -2,9 +2,7 @@ package sk.stuba.fei.uim.oop.game;
 
 
 import sk.stuba.fei.uim.oop.cards.action.*;
-import sk.stuba.fei.uim.oop.cards.nonaction.EmptyWater;
-import sk.stuba.fei.uim.oop.cards.nonaction.Duck;
-import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
+import sk.stuba.fei.uim.oop.cards.nonaction.*;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
 
@@ -19,7 +17,13 @@ public class GameBoard {
     private ArrayList<ActionCard> actionDeck;
     private ArrayList<NonActionCard> board;
 
+    public ArrayList<ActionCard> getActionDeck() {
+        return actionDeck;
+    }
 
+    public void setActionDeck(ArrayList<ActionCard> actionDeck) {
+        this.actionDeck = actionDeck;
+    }
 
     public GameBoard() {
         System.out.println("Welcome to DUCK INVASION");

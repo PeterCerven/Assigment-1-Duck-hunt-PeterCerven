@@ -1,9 +1,9 @@
 package sk.stuba.fei.uim.oop.cards.nonaction;
 
 public class EmptyWater extends NonActionCard{
-    private boolean aimed = true;
+    private boolean aimed;
 
     public boolean aimed(){
-        return this.aimed;
+        return this.aimed = true;
     };
 }
