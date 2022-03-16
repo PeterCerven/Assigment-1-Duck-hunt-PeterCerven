@@ -107,6 +107,26 @@ public class GameBoard {
     }
 
     private void gameStart() {
+        System.out.println("Game has started!");
+        while (playersLeft() > 1){
+            boardPrint();
+        }
 
+    }
+
+    private int playersLeft(){
+        int counter = 0;
+        for (Player player : players){
+            if (player.isAlive()){
+                counter++;
+            }
+        }
+        return  counter;
+    }
+
+    private void boardPrint(){
+        for (int i = 0; i < boardDeck.size(); i++){
+            System.out.println(boardDeck.get(i));
+        }
     }
 }

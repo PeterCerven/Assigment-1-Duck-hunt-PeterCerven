@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class Player extends GameBoard{
     public final String name;
-    private boolean active;
+    private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
 
     public Player(String name){
         this.name = name;
-        this.active = true;
+        this.alive = true;
         this.cardsToUse = new ArrayList<>();
         hitPoints = 5;
 
@@ -41,9 +41,11 @@ public class Player extends GameBoard{
 
     }
 
-    public boolean isActive(){
-        return this.active = true;
+    public boolean isAlive(){
+        return this.alive = true;
     }
 
-    public boolean isAlive() {return this.active = false;}
+    public String getName() {
+        return name;
+    }
 }
