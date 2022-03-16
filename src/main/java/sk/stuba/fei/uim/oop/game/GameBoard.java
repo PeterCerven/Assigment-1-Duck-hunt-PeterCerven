@@ -12,7 +12,6 @@ import java.util.Collections;
 public class GameBoard {
     private Player[] players;
     private int currentPlayer;
-    private int roundCounter;
     private ArrayList<NonActionCard> boardDeck;
     private ArrayList<ActionCard> actionDeck;
     private ArrayList<NonActionCard> board;
@@ -32,6 +31,7 @@ public class GameBoard {
         for (int i = 0; i < numberPlayers; i++) {
             this.players[i] = new Player(ZKlavesnice.readString("Enter PLAYER " + (i + 1) + " name:"));
         }
+        this.currentPlayer =0;
         boardDeck = new ArrayList<NonActionCard>();
         actionDeck = new ArrayList<ActionCard>();
         board = new ArrayList<NonActionCard>();
@@ -110,6 +110,12 @@ public class GameBoard {
         System.out.println("Game has started!");
         while (playersLeft() > 1){
             boardPrint();
+
+
+
+            nextPlayer();
+
+
         }
 
     }
@@ -125,8 +131,17 @@ public class GameBoard {
     }
 
     private void boardPrint(){
-        for (int i = 0; i < boardDeck.size(); i++){
-            System.out.println(boardDeck.get(i));
+        for (NonActionCard nonActionCard : boardDeck) {
+            System.out.println(nonActionCard);
+        }
+    }
+
+    private void nextPlayer(){
+        this.currentPlayer++;
+        this.currentPlayer %= this.players.length;
+        if(this.players[this.currentPlayer].isAlive()){
+            this.currentPlayer++;
+            this.currentPlayer %= this.players.length;
         }
     }
 }
