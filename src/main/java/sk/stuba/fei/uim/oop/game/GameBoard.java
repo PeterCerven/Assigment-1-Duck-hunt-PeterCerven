@@ -20,9 +20,6 @@ public class GameBoard {
         return actionDeck;
     }
 
-    public void setActionDeck(ArrayList<ActionCard> actionDeck) {
-        this.actionDeck = actionDeck;
-    }
 
     public GameBoard() {
         System.out.println("Welcome to DUCK INVASION");
@@ -32,9 +29,9 @@ public class GameBoard {
             this.players[i] = new Player(ZKlavesnice.readString("Enter PLAYER " + (i + 1) + " name:"));
         }
         this.currentPlayer =0;
-        boardDeck = new ArrayList<NonActionCard>();
-        actionDeck = new ArrayList<ActionCard>();
-        board = new ArrayList<NonActionCard>();
+        boardDeck = new ArrayList<>();
+        actionDeck = new ArrayList<>();
+        board = new ArrayList<>();
         this.initializeDecks();
         this.initializeBoard();
         this.initializeHands();
@@ -110,14 +107,16 @@ public class GameBoard {
         System.out.println("Game has started!");
         while (playersLeft() > 1){
             boardPrint();
-
-
+            System.out.println("This is " + this.players[currentPlayer].name + " turn");
+            for (int i = 0; i < 3; i++){
+                System.out.println(this.players[currentPlayer].cardsToUse.get(i));
+            }
 
             nextPlayer();
 
 
         }
-
+        System.out.println("The winner is " + winner());
     }
 
     private int playersLeft(){
@@ -143,5 +142,14 @@ public class GameBoard {
             this.currentPlayer++;
             this.currentPlayer %= this.players.length;
         }
+    }
+
+    private String winner(){
+        for (Player player : players){
+            if (player.isAlive()){
+                return player.name;
+            }
+        }
+        return null;
     }
 }

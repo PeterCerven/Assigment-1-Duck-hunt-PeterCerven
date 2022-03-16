@@ -41,8 +41,12 @@ public class Player extends GameBoard{
 
     }
 
+    public void dead(){
+        this.alive = false;
+    }
+
     public boolean isAlive(){
-        return this.alive = true;
+        return this.alive;
     }
 
     public String getName() {
