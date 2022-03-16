@@ -17,7 +17,7 @@ public class GameBoard {
     private ArrayList<NonActionCard> board;
 
     public ArrayList<ActionCard> getActionDeck() {
-        return actionDeck;
+        return this.actionDeck;
     }
 
 
@@ -37,6 +37,8 @@ public class GameBoard {
         this.initializeHands();
         this.gameStart();
     }
+
+
 
     public void fillNonActionDeck(int numCards, NonActionCard card){
 
@@ -111,6 +113,7 @@ public class GameBoard {
             for (int i = 0; i < 3; i++){
                 System.out.println(this.players[currentPlayer].cardsToUse.get(i));
             }
+            players[0].drawCard(this);
 
             nextPlayer();
 

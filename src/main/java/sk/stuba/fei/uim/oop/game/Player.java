@@ -6,7 +6,7 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
 import java.util.ArrayList;
 
-public class Player extends GameBoard{
+public class Player{
     public final String name;
     private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
@@ -25,19 +25,19 @@ public class Player extends GameBoard{
         hitPoints--;
     }
 
-    public void drawCard(){
-        this.cardsToUse.add(getActionDeck().get(0));
-        getActionDeck().remove(0);
+    public void drawCard(GameBoard gameBoard){
+        this.cardsToUse.add(gameBoard.getActionDeck().get(0));
+        gameBoard.getActionDeck().remove(0);
     }
 
     public void playCard(){
 
     }
 
-    public void throwAwayCard(){
+    public void throwAwayCard(GameBoard gameBoard){
         int chooseCard = ZKlavesnice.readInt("Enter number of players between 1 and 3: ");
-        getActionDeck().add(this.cardsToUse.get(chooseCard));
-        getActionDeck().remove(chooseCard);
+        gameBoard.getActionDeck().add(this.cardsToUse.get(chooseCard));
+        gameBoard.getActionDeck().remove(chooseCard);
 
     }
 
