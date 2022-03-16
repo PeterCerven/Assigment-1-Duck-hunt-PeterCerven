@@ -113,7 +113,8 @@ public class GameBoard {
             for (int i = 0; i < 3; i++){
                 System.out.println(this.players[currentPlayer].cardsToUse.get(i));
             }
-            players[0].drawCard(this);
+            players[0].drawCard(this.actionDeck.get(0));
+            this.actionDeck.remove(0);
 
             nextPlayer();
 

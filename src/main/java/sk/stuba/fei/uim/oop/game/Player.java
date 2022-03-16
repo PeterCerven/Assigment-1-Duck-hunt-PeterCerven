@@ -25,9 +25,8 @@ public class Player{
         hitPoints--;
     }
 
-    public void drawCard(GameBoard gameBoard){
-        this.cardsToUse.add(gameBoard.getActionDeck().get(0));
-        gameBoard.getActionDeck().remove(0);
+    public void drawCard(ActionCard card){
+        this.cardsToUse.add(card);
     }
 
     public void playCard(){
