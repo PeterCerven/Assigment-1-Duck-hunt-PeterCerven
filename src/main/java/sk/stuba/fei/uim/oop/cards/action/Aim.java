@@ -28,7 +28,7 @@ public class Aim extends ActionCard {
                        ArrayList<NonActionCard> board,
                        ArrayList<NonActionCard> boardDeck,
                        Player player) {
-        int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
+        int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
         aimers[position] = true;
     }
 

@@ -27,9 +27,9 @@ public class Shoot extends ActionCard {
                        ArrayList<NonActionCard> board,
                        ArrayList<NonActionCard> boardDeck,
                        Player player) {
-        int position = KeyboardInput.readInt("Choose postition:") - 1;
+        int position = KeyboardInput.readInt("Choose position") - 1;
         while (!aimers[position]){
-            position = KeyboardInput.readInt("Choose another one:") - 1;
+            position = KeyboardInput.readInt("Choose another one") - 1;
         }
         if (board.get(position).getName().equals("Duck")) {
             board.remove(position);
