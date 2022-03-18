@@ -33,7 +33,7 @@ public class Player {
     }
 
     public void playCard(int cardNumber, int currentPlayer) {
-        this.cardsToUse.get(cardNumber).action(currentPlayer);
+        this.cardsToUse.get(cardNumber - 1).action(currentPlayer);
     }
 
     public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){

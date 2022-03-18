@@ -16,14 +16,13 @@ public class GameBoard {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    private Player[] players;
+    private final Player[] players;
     private int currentPlayer;
-    private ArrayList<NonActionCard> boardDeck;
-    private ArrayList<ActionCard> actionDeck;
-    private ArrayList<NonActionCard> board;
-    private int[] usableCards;
-    private boolean[] aimers;
-    private int chooseCard;
+    private final ArrayList<NonActionCard> boardDeck;
+    private final ArrayList<ActionCard> actionDeck;
+    private final ArrayList<NonActionCard> board;
+    private final int[] usableCards;
+    private final boolean[] aimers;
 
 
     public GameBoard() {
@@ -45,9 +44,6 @@ public class GameBoard {
         this.gameStart();
     }
 
-    public int getCurrentPlayer() {
-        return currentPlayer;
-    }
 
     private void initializeDecks() {
         //filling deck of non action cards
@@ -94,9 +90,9 @@ public class GameBoard {
     }
 
     private void gameStart() {
+        int chooseCard;
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
-            Arrays.fill(usableCards, 0);
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are");
             for (int i = 0; i < 3; i++) {
@@ -107,20 +103,21 @@ public class GameBoard {
                 } else {
                     System.out.println(ANSI_RED + (i + 1) + " " + this.players[currentPlayer].cardsToUse.get(i)
                             .getName() + ANSI_RESET);
+                    usableCards[i] = 0;
                 }
             }
             if (Arrays.stream(usableCards).sum() > 0) {
-                chooseCard = KeyboardInput.readInt("Choose card, any card can use") - 1;
+                chooseCard = KeyboardInput.readInt("Choose card, any card can use");
                 while (!contains(usableCards, chooseCard)) {
-                    chooseCard = KeyboardInput.readInt("Choose another one") - 1;
+                    chooseCard = KeyboardInput.readInt("Choose another one");
                 }
                 players[currentPlayer].playCard(chooseCard, currentPlayer);
             } else {
-                chooseCard = KeyboardInput.readInt("Choose card, any card to throw") - 1;
-                players[currentPlayer].throwAwayCard(chooseCard, actionDeck);
+                chooseCard = KeyboardInput.readInt("Choose card, any card to throw");
+                players[currentPlayer].throwAwayCard(chooseCard - 1, actionDeck);
             }
-            actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard));
-            players[currentPlayer].cardsToUse.remove(chooseCard);
+            actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
+            players[currentPlayer].cardsToUse.remove(chooseCard - 1);
 
 
             players[currentPlayer].drawCard(this.actionDeck.get(0));
@@ -163,7 +160,7 @@ public class GameBoard {
     private void nextPlayer() {
         this.currentPlayer++;
         this.currentPlayer %= this.players.length;
-        if (this.players[this.currentPlayer].isAlive()) {
+        if (!this.players[this.currentPlayer].isAlive()) {
             this.currentPlayer++;
             this.currentPlayer %= this.players.length;
         }
