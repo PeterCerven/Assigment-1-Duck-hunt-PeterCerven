@@ -3,7 +3,8 @@ package sk.stuba.fei.uim.oop.game;
 
 import sk.stuba.fei.uim.oop.cards.action.*;
 import sk.stuba.fei.uim.oop.cards.nonaction.*;
-import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
+import sk.stuba.fei.uim.oop.utility.KeyboardInput;
+
 
 
 import java.util.ArrayList;
@@ -15,23 +16,21 @@ public class GameBoard {
     private ArrayList<NonActionCard> boardDeck;
     private ArrayList<ActionCard> actionDeck;
     private ArrayList<NonActionCard> board;
-
-    public ArrayList<ActionCard> getActionDeck() {
-        return this.actionDeck;
-    }
+    private boolean[] aimers;
 
 
     public GameBoard() {
         System.out.println("Welcome to DUCK INVASION");
-        int numberPlayers = ZKlavesnice.readInt("Enter number of players between 2 and 6: ");
+        int numberPlayers = KeyboardInput.readInt("Enter number of players between 2 and 6: ");
         this.players = new Player[numberPlayers];
         for (int i = 0; i < numberPlayers; i++) {
-            this.players[i] = new Player(ZKlavesnice.readString("Enter PLAYER " + (i + 1) + " name:"));
+            this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name:"));
         }
         this.currentPlayer =0;
         boardDeck = new ArrayList<>();
         actionDeck = new ArrayList<>();
         board = new ArrayList<>();
+        aimers = new boolean[6];
         this.initializeDecks();
         this.initializeBoard();
         this.initializeHands();
@@ -111,9 +110,12 @@ public class GameBoard {
             boardPrint();
             System.out.println("This is " + this.players[currentPlayer].name + " turn");
             for (int i = 0; i < 3; i++){
+                //if (playable(this.players[currentPlayer].cardsToUse.get(i)))
                 System.out.println(this.players[currentPlayer].cardsToUse.get(i));
             }
-            players[0].drawCard(this.actionDeck.get(0));
+            int chooseCard = KeyboardInput.readInt("Choose card ");
+            //players[currentPlayer].playCard(this.players[currentPlayer].cardsToUse.get(chooseCard));
+            players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
 
             nextPlayer();
