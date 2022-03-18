@@ -6,7 +6,6 @@ import sk.stuba.fei.uim.oop.cards.nonaction.*;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,7 +25,7 @@ public class GameBoard {
         for (int i = 0; i < numberPlayers; i++) {
             this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name:"));
         }
-        this.currentPlayer =0;
+        this.currentPlayer = 0;
         boardDeck = new ArrayList<>();
         actionDeck = new ArrayList<>();
         board = new ArrayList<>();
@@ -41,14 +40,15 @@ public class GameBoard {
         return actionDeck;
     }
 
-    public void fillNonActionDeck(int numCards, NonActionCard card){
+    public void fillNonActionDeck(int numCards, NonActionCard card) {
 
-        for (int i = 0; i < numCards; i++){
+        for (int i = 0; i < numCards; i++) {
             this.boardDeck.add(card);
         }
     }
-    public void fillActionDeck(int numCards, ActionCard card){
-        for (int i = 0; i < numCards; i++){
+
+    public void fillActionDeck(int numCards, ActionCard card) {
+        for (int i = 0; i < numCards; i++) {
             this.actionDeck.add(card);
         }
     }
@@ -90,15 +90,16 @@ public class GameBoard {
         Collections.shuffle(this.actionDeck);
 
     }
-    public void initializeBoard(){
-        for (int i = 0; i < 6; i++){
+
+    public void initializeBoard() {
+        for (int i = 0; i < 6; i++) {
             this.board.add(this.boardDeck.get(i));
         }
         this.boardDeck.subList(0, 6).clear();
     }
 
-    private void initializeHands(){
-        for (Player player: players){
+    private void initializeHands() {
+        for (Player player : players) {
             for (int i = 0; i < 3; i++) {
                 player.cardsToUse.add(this.actionDeck.get(0));
                 this.actionDeck.remove(0);
@@ -108,16 +109,16 @@ public class GameBoard {
 
     private void gameStart() {
         System.out.println("Game has started!\n");
-        while (playersLeft() > 1){
+        while (playersLeft() > 1) {
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
-            for (int i = 0; i < 3; i++){
-                //if (playable(this.players[currentPlayer].cardsToUse.get(i)))
+            for (int i = 0; i < 3; i++) {
+                //if (playable(this.players[currentPlayer].cardsToUse.get(i))){
                 System.out.println((i + 1) + this.players[currentPlayer].cardsToUse.get(i).getName());
             }
 
             int chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
-            players[currentPlayer].playCard(chooseCard, this.boardDeck, this.aimers, this.board, players[currentPlayer]);
+            players[currentPlayer].playCard(chooseCard, this.aimers, this.board, this.boardDeck, players[currentPlayer]);
             actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard));
             players[currentPlayer].cardsToUse.remove(chooseCard);
 
@@ -126,42 +127,41 @@ public class GameBoard {
 
             nextPlayer();
 
-            break;
 
         }
         System.out.println("The winner is " + winner());
     }
 
-    private int playersLeft(){
+    private int playersLeft() {
         int counter = 0;
-        for (Player player : players){
-            if (player.isAlive()){
+        for (Player player : players) {
+            if (player.isAlive()) {
                 counter++;
             }
         }
-        return  counter;
+        return counter;
     }
 
-    private void boardPrint(){
+    private void boardPrint() {
         System.out.println("Board is:");
-        for(int i = 0; i < board.size(); i++){
+        for (int i = 0; i < board.size(); i++) {
             System.out.print(aimers[i]);
             System.out.println(" " + board.get(i).getName());
         }
     }
 
-    private void nextPlayer(){
+    private void nextPlayer() {
         this.currentPlayer++;
         this.currentPlayer %= this.players.length;
-        if(this.players[this.currentPlayer].isAlive()){
+        if (this.players[this.currentPlayer].isAlive()) {
             this.currentPlayer++;
             this.currentPlayer %= this.players.length;
         }
     }
 
-    private String winner(){
-        for (Player player : players){
-            if (player.isAlive()){
+    private String winner() {
+        for (Player player : players) {
+            if (player.isAlive()) {
                 return player.name;
             }
         }

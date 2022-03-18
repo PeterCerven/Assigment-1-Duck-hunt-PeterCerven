@@ -14,10 +14,23 @@ public class Shoot extends ActionCard {
     }
 
     @Override
-    public void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers,
+    public boolean playable(boolean[] aimers) {
+        for(boolean b : aimers) {
+            if (b) return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public void action(boolean[] aimers,
                        ArrayList<NonActionCard> board,
+                       ArrayList<NonActionCard> boardDeck,
                        Player player) {
-        int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
+        int position = KeyboardInput.readInt("Choose postition:") - 1;
+        while (!aimers[position]){
+            position = KeyboardInput.readInt("Choose another one:") - 1;
+        }
         if (board.get(position).getName().equals("Duck")) {
             board.remove(position);
             board.add(boardDeck.get(0));

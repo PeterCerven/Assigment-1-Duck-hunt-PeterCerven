@@ -4,17 +4,25 @@ import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.game.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Scatter extends ActionCard{
+public class Scatter extends ActionCard {
     @Override
     public String getName() {
         return "Scatter";
     }
 
     @Override
-    public void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       Player player) {
+    public boolean playable(boolean[] aimers) {
+        return true;
+    }
 
+
+    @Override
+    public void action(boolean[] aimers,
+                       ArrayList<NonActionCard> board,
+                       ArrayList<NonActionCard> boardDeck,
+                       Player player) {
+        Collections.shuffle(board);
     }
 }
