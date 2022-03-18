@@ -24,18 +24,24 @@ public class Player{
     public void loseHealth(){
         System.out.println("Player has left " + this.hitPoints + " ducks");
         hitPoints--;
+        if (hitPoints == 0){
+            dead();
+        }
     }
 
     public void drawCard(ActionCard card){
         this.cardsToUse.add(card);
     }
 
-    public void playCard(int cardNumber, ArrayList<NonActionCard> boardDeck, boolean[] aimers){
-       this.cardsToUse.get(cardNumber).action(boardDeck, aimers);
+    public void playCard(int cardNumber, ArrayList<NonActionCard> boardDeck, boolean[] aimers,
+                         ArrayList<NonActionCard> board,
+                         Player player){
+       this.cardsToUse.get(cardNumber).action(boardDeck, aimers, board, player);
     }
 
 
     public void dead(){
+        System.out.println("Player " + this.name + " lost all his ducks.");
         this.alive = false;
     }
 

@@ -117,7 +117,7 @@ public class GameBoard {
             }
 
             int chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
-            players[currentPlayer].playCard(chooseCard, this.boardDeck, this.aimers);
+            players[currentPlayer].playCard(chooseCard, this.boardDeck, this.aimers, this.board, players[currentPlayer]);
             actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard));
             players[currentPlayer].cardsToUse.remove(chooseCard);
 
