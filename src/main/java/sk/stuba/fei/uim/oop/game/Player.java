@@ -39,6 +39,11 @@ public class Player {
         this.cardsToUse.get(cardNumber).action(aimers, board, boardDeck, player);
     }
 
+    public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){
+        actionDeck.add(cardsToUse.get(chooseCard));
+        cardsToUse.remove(chooseCard);
+    }
+
 
     public void dead() {
         System.out.println("Player " + this.name + " lost all his ducks.");

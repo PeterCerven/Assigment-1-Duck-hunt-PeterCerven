@@ -7,15 +7,23 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
+
+
 public class GameBoard {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     private Player[] players;
     private int currentPlayer;
     private ArrayList<NonActionCard> boardDeck;
     private ArrayList<ActionCard> actionDeck;
     private ArrayList<NonActionCard> board;
+    private int[] usableCards;
     private boolean[] aimers;
+    private int chooseCard;
 
 
     public GameBoard() {
@@ -30,6 +38,7 @@ public class GameBoard {
         actionDeck = new ArrayList<>();
         board = new ArrayList<>();
         aimers = new boolean[6];
+        usableCards = new int[3];
         this.initializeDecks();
         this.initializeBoard();
         this.initializeHands();
@@ -110,17 +119,32 @@ public class GameBoard {
     private void gameStart() {
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
+            Arrays.fill(usableCards, 0);
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
             for (int i = 0; i < 3; i++) {
-                //if (playable(this.players[currentPlayer].cardsToUse.get(i))){
-                System.out.println((i + 1) + this.players[currentPlayer].cardsToUse.get(i).getName());
-            }
+                if (this.players[currentPlayer].cardsToUse.get(i).playable(this.aimers)) {
+                    System.out.println((i + 1) + this.players[currentPlayer].cardsToUse.get(i).getName());
+                    usableCards[i] = i + 1;
 
-            int chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
-            players[currentPlayer].playCard(chooseCard, this.aimers, this.board, this.boardDeck, players[currentPlayer]);
+                } else {
+                    System.out.println(ANSI_RED + (i + 1) + this.players[currentPlayer].cardsToUse.get(i).getName()
+                            + ANSI_RESET);
+                }
+            }
+            if (Arrays.stream(usableCards).sum() > 0) {
+                chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
+                while (!contains(usableCards, chooseCard)) {
+                    chooseCard = KeyboardInput.readInt("Choose another one:") - 1;
+                }
+                players[currentPlayer].playCard(chooseCard, this.aimers, this.board, this.boardDeck, players[currentPlayer]);
+            } else {
+                chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
+                players[currentPlayer].throwAwayCard(chooseCard, actionDeck);
+            }
             actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard));
             players[currentPlayer].cardsToUse.remove(chooseCard);
+
 
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
@@ -140,6 +164,15 @@ public class GameBoard {
             }
         }
         return counter;
+    }
+
+    private boolean contains(int[] usableCards, int chosenNumber) {
+        for (int usableCard : usableCards) {
+            if (usableCard == chosenNumber) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void boardPrint() {
