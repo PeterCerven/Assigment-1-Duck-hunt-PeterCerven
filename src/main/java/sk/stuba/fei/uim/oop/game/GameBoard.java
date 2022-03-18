@@ -37,7 +37,9 @@ public class GameBoard {
         this.gameStart();
     }
 
-
+    public ArrayList<ActionCard> getActionDeck() {
+        return actionDeck;
+    }
 
     public void fillNonActionDeck(int numCards, NonActionCard card){
 
@@ -92,7 +94,7 @@ public class GameBoard {
         for (int i = 0; i < 6; i++){
             this.board.add(this.boardDeck.get(i));
         }
-        this.boardDeck.subList(0, 5).clear();
+        this.boardDeck.subList(0, 6).clear();
     }
 
     private void initializeHands(){
@@ -105,21 +107,26 @@ public class GameBoard {
     }
 
     private void gameStart() {
-        System.out.println("Game has started!");
+        System.out.println("Game has started!\n");
         while (playersLeft() > 1){
             boardPrint();
-            System.out.println("This is " + this.players[currentPlayer].name + " turn");
+            System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
             for (int i = 0; i < 3; i++){
                 //if (playable(this.players[currentPlayer].cardsToUse.get(i)))
-                System.out.println(this.players[currentPlayer].cardsToUse.get(i));
+                System.out.println((i + 1) + this.players[currentPlayer].cardsToUse.get(i).getName());
             }
-            int chooseCard = KeyboardInput.readInt("Choose card ");
-            //players[currentPlayer].playCard(this.players[currentPlayer].cardsToUse.get(chooseCard));
+
+            int chooseCard = KeyboardInput.readInt("Choose card, any card ") - 1;
+            players[currentPlayer].playCard(chooseCard, this.boardDeck, this.aimers);
+            actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard));
+            players[currentPlayer].cardsToUse.remove(chooseCard);
+
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
 
             nextPlayer();
 
+            break;
 
         }
         System.out.println("The winner is " + winner());
@@ -136,8 +143,10 @@ public class GameBoard {
     }
 
     private void boardPrint(){
-        for (NonActionCard nonActionCard : boardDeck) {
-            System.out.println(nonActionCard);
+        System.out.println("Board is:");
+        for(int i = 0; i < board.size(); i++){
+            System.out.print(aimers[i]);
+            System.out.println(" " + board.get(i).getName());
         }
     }
 

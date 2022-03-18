@@ -8,6 +8,11 @@ public class DuckDance extends ActionCard{
 
 
     @Override
+    public String getName() {
+        return "DuckDance";
+    }
+
+    @Override
     public void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers) {
 
     }

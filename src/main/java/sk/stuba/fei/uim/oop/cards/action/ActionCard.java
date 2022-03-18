@@ -7,4 +7,6 @@ import java.util.ArrayList;
 public abstract class ActionCard {
     public abstract void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers);
 
+    public abstract String getName();
+
 }

@@ -8,6 +8,11 @@ public class DuckMarch extends ActionCard{
 
 
     @Override
+    public String getName() {
+        return "DuckMarch";
+    }
+
+    @Override
     public void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers) {
 
     }

@@ -8,8 +8,15 @@ public class Aim extends ActionCard{
 
 
     @Override
+    public String getName() {
+        return "Aim";
+    }
+
+    @Override
     public void action(ArrayList<NonActionCard> boardDeck, boolean[] aimers) {
         int position = KeyboardInput.readInt("Choose postition between 1 and 6");
         aimers[position] = true;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.oop.game;
 
 import sk.stuba.fei.uim.oop.cards.action.ActionCard;
+import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.game.GameBoard;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
@@ -29,16 +30,10 @@ public class Player{
         this.cardsToUse.add(card);
     }
 
-    public void playCard(){
-
+    public void playCard(int cardNumber, ArrayList<NonActionCard> boardDeck, boolean[] aimers){
+       this.cardsToUse.get(cardNumber).action(boardDeck, aimers);
     }
 
-    public void throwAwayCard(GameBoard gameBoard){
-        int chooseCard = ZKlavesnice.readInt("Enter number of players between 1 and 3: ");
-        gameBoard.getActionDeck().add(this.cardsToUse.get(chooseCard));
-        gameBoard.getActionDeck().remove(chooseCard);
-
-    }
 
     public void dead(){
         this.alive = false;
