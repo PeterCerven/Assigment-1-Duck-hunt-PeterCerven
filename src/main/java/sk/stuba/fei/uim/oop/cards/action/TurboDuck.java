@@ -7,22 +7,29 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 import java.util.ArrayList;
 
 public class TurboDuck extends ActionCard {
+    boolean[] aimers;
+    ArrayList<NonActionCard> board;
+    ArrayList<NonActionCard> boardDeck;
+
+    public TurboDuck(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
+        this.aimers = aimers;
+        this.board = board;
+        this.boardDeck = boardDeck;
+    }
+
     @Override
     public String getName() {
         return "TurboDuck";
     }
 
     @Override
-    public boolean playable(boolean[] aimers) {
+    public boolean playable() {
         return true;
     }
 
 
     @Override
-    public void action(boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       ArrayList<NonActionCard> boardDeck,
-                       Player player) {
+    public void action(int currentPlayer) {
         int position = KeyboardInput.readInt("Choose postition:") - 1;
         while (!aimers[position]){
             position = KeyboardInput.readInt("Choose another one:") - 1;

@@ -45,10 +45,9 @@ public class GameBoard {
         this.gameStart();
     }
 
-    public ArrayList<ActionCard> getActionDeck() {
-        return actionDeck;
+    public int getCurrentPlayer() {
+        return currentPlayer;
     }
-
 
     private void initializeDecks() {
         //filling deck of non action cards
@@ -61,19 +60,19 @@ public class GameBoard {
         Collections.shuffle(this.boardDeck);
 
         //filing deck of action cards
-        Aim aim = new Aim();
+        Aim aim = new Aim(this.aimers);
         this.actionDeck.addAll(Collections.nCopies(10, aim));
-        Shoot shoot = new Shoot();
+        Shoot shoot = new Shoot(this.aimers, this.board, this.boardDeck, this.players);
         this.actionDeck.addAll(Collections.nCopies(12, shoot));
-        WildBill wildBill = new WildBill();
+        WildBill wildBill = new WildBill(this.aimers, this.board, this.boardDeck, this.players);
         this.actionDeck.addAll(Collections.nCopies(2, wildBill));
-        DuckMarch duckMarch = new DuckMarch();
+        DuckMarch duckMarch = new DuckMarch(this.board, this.boardDeck);
         this.actionDeck.addAll(Collections.nCopies(6, duckMarch));
-        Scatter scatter = new Scatter();
+        Scatter scatter = new Scatter(this.board);
         this.actionDeck.addAll(Collections.nCopies(2, scatter));
-        TurboDuck turboDuck = new TurboDuck();
+        TurboDuck turboDuck = new TurboDuck(this.aimers, this.board, this.boardDeck);
         this.actionDeck.add(turboDuck);
-        DuckDance duckDance = new DuckDance();
+        DuckDance duckDance = new DuckDance(this.board, this.boardDeck);
         this.actionDeck.add(duckDance);
         Collections.shuffle(this.actionDeck);
     }
@@ -101,7 +100,7 @@ public class GameBoard {
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are");
             for (int i = 0; i < 3; i++) {
-                if (this.players[currentPlayer].cardsToUse.get(i).playable(this.aimers)) {
+                if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
                     System.out.println((i + 1) + " " + this.players[currentPlayer].cardsToUse.get(i).getName());
                     usableCards[i] = i + 1;
 
@@ -115,8 +114,7 @@ public class GameBoard {
                 while (!contains(usableCards, chooseCard)) {
                     chooseCard = KeyboardInput.readInt("Choose another one") - 1;
                 }
-                players[currentPlayer].playCard(chooseCard, this.aimers, this.board, this.boardDeck,
-                        players[currentPlayer]);
+                players[currentPlayer].playCard(chooseCard, currentPlayer);
             } else {
                 chooseCard = KeyboardInput.readInt("Choose card, any card to throw") - 1;
                 players[currentPlayer].throwAwayCard(chooseCard, actionDeck);

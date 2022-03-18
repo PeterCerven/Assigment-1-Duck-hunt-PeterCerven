@@ -7,22 +7,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Scatter extends ActionCard {
+    ArrayList<NonActionCard> board;
+
+    public Scatter(ArrayList<NonActionCard> board) {
+        this.board = board;
+    }
+
     @Override
     public String getName() {
         return "Scatter";
     }
 
     @Override
-    public boolean playable(boolean[] aimers) {
+    public boolean playable() {
         return true;
     }
 
 
     @Override
-    public void action(boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       ArrayList<NonActionCard> boardDeck,
-                       Player player) {
+    public void action(int currentPlayer) {
         Collections.shuffle(board);
     }
 }

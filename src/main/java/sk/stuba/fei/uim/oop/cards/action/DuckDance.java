@@ -7,7 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DuckDance extends ActionCard {
+    ArrayList<NonActionCard> board;
+    ArrayList<NonActionCard> boardDeck;
 
+
+    public DuckDance(ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
+        this.board = board;
+        this.boardDeck = boardDeck;
+    }
 
     @Override
     public String getName() {
@@ -15,16 +22,13 @@ public class DuckDance extends ActionCard {
     }
 
     @Override
-    public boolean playable(boolean[] aimers) {
+    public boolean playable() {
         return true;
     }
 
 
     @Override
-    public void action(boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       ArrayList<NonActionCard> boardDeck,
-                       Player player) {
+    public void action(int currentPlayer) {
         boardDeck.addAll(board);
         board.clear();
         Collections.shuffle(boardDeck);

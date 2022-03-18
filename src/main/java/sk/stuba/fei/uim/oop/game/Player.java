@@ -32,11 +32,8 @@ public class Player {
         this.cardsToUse.add(card);
     }
 
-    public void playCard(int cardNumber, boolean[] aimers,
-                         ArrayList<NonActionCard> board,
-                         ArrayList<NonActionCard> boardDeck,
-                         Player player) {
-        this.cardsToUse.get(cardNumber).action(aimers, board, boardDeck, player);
+    public void playCard(int cardNumber, int currentPlayer) {
+        this.cardsToUse.get(cardNumber).action(currentPlayer);
     }
 
     public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){

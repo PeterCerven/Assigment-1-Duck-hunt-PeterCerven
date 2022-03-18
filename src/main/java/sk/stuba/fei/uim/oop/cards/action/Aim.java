@@ -7,7 +7,12 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 import java.util.ArrayList;
 
 public class Aim extends ActionCard {
+    boolean[] aimers;
 
+
+    public Aim(boolean[] aimers) {
+        this.aimers = aimers;
+    }
 
     @Override
     public String getName() {
@@ -15,7 +20,7 @@ public class Aim extends ActionCard {
     }
 
     @Override
-    public boolean playable(boolean[] aimers) {
+    public boolean playable() {
         for(boolean b : aimers) {
             if (!b) return true;
         }
@@ -24,10 +29,7 @@ public class Aim extends ActionCard {
 
 
     @Override
-    public void action(boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       ArrayList<NonActionCard> boardDeck,
-                       Player player) {
+    public void action(int currentPlayer) {
         int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
         aimers[position] = true;
     }

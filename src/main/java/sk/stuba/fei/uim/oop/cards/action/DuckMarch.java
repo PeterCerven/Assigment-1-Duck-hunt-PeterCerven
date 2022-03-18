@@ -6,7 +6,13 @@ import sk.stuba.fei.uim.oop.game.Player;
 import java.util.ArrayList;
 
 public class DuckMarch extends ActionCard {
+    ArrayList<NonActionCard> board;
+    ArrayList<NonActionCard> boardDeck;
 
+    public DuckMarch( ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
+        this.board = board;
+        this.boardDeck = boardDeck;
+    }
 
     @Override
     public String getName() {
@@ -14,16 +20,13 @@ public class DuckMarch extends ActionCard {
     }
 
     @Override
-    public boolean playable(boolean[] aimers) {
+    public boolean playable() {
         return true;
     }
 
 
     @Override
-    public void action(boolean[] aimers,
-                       ArrayList<NonActionCard> board,
-                       ArrayList<NonActionCard> boardDeck,
-                       Player player) {
+    public void action(int currentPlayer) {
         boardDeck.add(board.get(0));
         board.remove(0);
         board.add(boardDeck.get(0));

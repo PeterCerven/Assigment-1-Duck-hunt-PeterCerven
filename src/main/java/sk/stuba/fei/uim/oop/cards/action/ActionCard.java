@@ -6,13 +6,10 @@ import sk.stuba.fei.uim.oop.game.Player;
 import java.util.ArrayList;
 
 public abstract class ActionCard {
-    public abstract void action(boolean[] aimers,
-                                ArrayList<NonActionCard> board,
-                                ArrayList<NonActionCard> boardDeck,
-                                Player player);
+    public abstract void action(int currentPlayer);
 
     public abstract String getName();
 
-    public abstract boolean playable(boolean[] aimers);
+    public abstract boolean playable();
 
 }
