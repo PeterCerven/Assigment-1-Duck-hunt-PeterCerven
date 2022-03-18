@@ -29,15 +29,25 @@ public class WildBill extends ActionCard {
         return true;
     }
 
+    public int findOwnerIndex(String owner){
+        for (int i = 0; i < players.length; i++){
+            if (players[i].name.equals(owner)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @Override
     public void action(int currentPlayer) {
+        int index;
         int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
-        if (board.get(position).getName().equals("Duck")) {
+        if (this.board.get(position).getName().startsWith("Duck")) {
             board.remove(position);
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
-            players[currentPlayer].loseHealth();
+            index = findOwnerIndex(this.board.get(position).getOwner());
+            players[index].loseHealth();
 
         }
         aimers[position] = false;

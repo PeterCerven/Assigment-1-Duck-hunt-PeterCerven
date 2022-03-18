@@ -9,7 +9,7 @@ public class Duck extends NonActionCard {
         this.name = "Duck " + name;
         this.owner = name;
     }
-
+    @Override
     public String getOwner() {
         return owner;
     }

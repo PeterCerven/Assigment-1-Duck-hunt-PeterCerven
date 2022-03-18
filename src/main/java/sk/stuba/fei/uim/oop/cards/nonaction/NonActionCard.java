@@ -4,4 +4,6 @@ public abstract class NonActionCard {
 
     public abstract String getName();
 
+    public abstract String getOwner();
+
 }

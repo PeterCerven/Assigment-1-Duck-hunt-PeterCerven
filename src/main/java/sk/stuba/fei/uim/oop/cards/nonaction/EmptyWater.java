@@ -11,4 +11,9 @@ public class EmptyWater extends NonActionCard {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String getOwner() {
+        return null;
+    }
 }

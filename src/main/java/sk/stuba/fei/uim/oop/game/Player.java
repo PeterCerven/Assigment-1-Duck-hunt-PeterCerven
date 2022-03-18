@@ -7,7 +7,7 @@ import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import java.util.ArrayList;
 
 public class Player {
-    public final String name;
+    public String name;
     private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
@@ -19,6 +19,7 @@ public class Player {
         hitPoints = 5;
 
     }
+
 
     public void loseHealth() {
         System.out.println("Player has left " + this.hitPoints + " ducks");
