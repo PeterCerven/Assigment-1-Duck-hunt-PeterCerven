@@ -23,16 +23,24 @@ public class TurboDuck extends ActionCard {
 
     @Override
     public boolean playable() {
-        return true;
+        for (NonActionCard nonActionCard : board) {
+            if (nonActionCard.getName().startsWith("Duck")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
     @Override
     public void action() {
-        int position = KeyboardInput.readInt("Choose postition:") - 1;
+        int position = KeyboardInput.readInt("Choose position:") - 1;
+        while (!board.get(position).getName().startsWith("Duck")){
+            position = KeyboardInput.readInt("Choose another position:") - 1;
+        }
         boardDeck.add(0, board.get(position));
         board.remove(position);
         board.add(0, boardDeck.get(0));
-        System.out.println(getName() + " was played o position " + (position + 1));
+        System.out.println(getName() + " was played on position " + (position + 1));
     }
 }

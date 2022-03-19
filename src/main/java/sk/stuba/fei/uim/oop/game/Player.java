@@ -11,12 +11,14 @@ public class Player {
     private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
+    private ArrayList<ActionCard> actionDeck;
 
-    public Player(String name) {
+    public Player(String name , ArrayList<ActionCard> actionDeck) {
         this.name = name;
         this.alive = true;
         this.cardsToUse = new ArrayList<>();
         hitPoints = 5;
+        this.actionDeck = new ArrayList<>();
 
     }
 
@@ -47,6 +49,9 @@ public class Player {
     public void dead() {
         System.out.println("Player " + this.name + " lost all his ducks.");
         this.alive = false;
+        actionDeck.addAll(cardsToUse);
+        cardsToUse.clear();
+
     }
 
     public boolean isAlive() {

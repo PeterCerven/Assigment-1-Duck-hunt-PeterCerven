@@ -29,12 +29,13 @@ public class GameBoard {
         System.out.println("Welcome to DUCK INVASION");
         int numberPlayers = KeyboardInput.readInt("Enter number of players between 2 and 6");
         this.players = new Player[numberPlayers];
+        actionDeck = new ArrayList<>();
         for (int i = 0; i < numberPlayers; i++) {
-            this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name"));
+            this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name"),
+            this.actionDeck);
         }
         this.currentPlayer = 0;
         boardDeck = new ArrayList<>();
-        actionDeck = new ArrayList<>();
         board = new ArrayList<>();
         aimers = new boolean[6];
         usableCards = new int[3];
