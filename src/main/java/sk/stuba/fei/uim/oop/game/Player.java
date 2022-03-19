@@ -22,8 +22,8 @@ public class Player {
 
 
     public void loseHealth() {
-        System.out.println("Player has left " + this.hitPoints + " ducks");
         hitPoints--;
+        System.out.println(this.name + "has left " + this.hitPoints + " ducks");
         if (hitPoints == 0) {
             dead();
         }
@@ -33,8 +33,8 @@ public class Player {
         this.cardsToUse.add(card);
     }
 
-    public void playCard(int cardNumber, int currentPlayer) {
-        this.cardsToUse.get(cardNumber - 1).action(currentPlayer);
+    public void playCard(int cardNumber) {
+        this.cardsToUse.get(cardNumber - 1).action();
     }
 
     public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){

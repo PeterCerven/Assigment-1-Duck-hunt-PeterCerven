@@ -25,7 +25,7 @@ public class Scatter extends ActionCard {
 
 
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         Collections.shuffle(board);
     }
 }

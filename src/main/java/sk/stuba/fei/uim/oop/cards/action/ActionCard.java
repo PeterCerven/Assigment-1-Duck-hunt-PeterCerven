@@ -6,7 +6,7 @@ import sk.stuba.fei.uim.oop.game.Player;
 import java.util.ArrayList;
 
 public abstract class ActionCard {
-    public abstract void action(int currentPlayer);
+    public abstract void action();
 
     public abstract String getName();
 

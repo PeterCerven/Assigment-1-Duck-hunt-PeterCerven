@@ -43,22 +43,27 @@ public class Shoot extends ActionCard {
         return -1;
     }
 
-
-    @Override
-    public void action(int currentPlayer) {
+    public void killDuck(int position){
         int index;
-        int position = KeyboardInput.readInt("Choose position") - 1;
-        while (!aimers[position]){
-            position = KeyboardInput.readInt("Choose another one") - 1;
-        }
         if (this.board.get(position).getName().startsWith("Duck")) {
+            index = findOwnerIndex(this.board.get(position).getOwner());
+            boardDeck.add(board.get(position));
             board.remove(position);
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
-            index = findOwnerIndex(this.board.get(position).getOwner());
             players[index].loseHealth();
 
         }
         aimers[position] = false;
+    }
+
+
+    @Override
+    public void action() {
+        int position = KeyboardInput.readInt("Choose position") - 1;
+        while (!aimers[position]){
+            position = KeyboardInput.readInt("Choose another one") - 1;
+        }
+        killDuck(position);
     }
 }

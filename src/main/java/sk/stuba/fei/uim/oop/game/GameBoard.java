@@ -111,14 +111,13 @@ public class GameBoard {
                 while (!contains(usableCards, chooseCard)) {
                     chooseCard = KeyboardInput.readInt("Choose another one");
                 }
-                players[currentPlayer].playCard(chooseCard, currentPlayer);
+                players[currentPlayer].playCard(chooseCard);
+                actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
+                players[currentPlayer].cardsToUse.remove(chooseCard - 1);
             } else {
                 chooseCard = KeyboardInput.readInt("Choose card, any card to throw");
                 players[currentPlayer].throwAwayCard(chooseCard - 1, actionDeck);
             }
-            actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
-            players[currentPlayer].cardsToUse.remove(chooseCard - 1);
-
 
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);

@@ -29,7 +29,7 @@ public class Aim extends ActionCard {
 
 
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
         aimers[position] = true;
     }

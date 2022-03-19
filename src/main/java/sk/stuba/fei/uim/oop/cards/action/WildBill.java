@@ -3,6 +3,7 @@ package sk.stuba.fei.uim.oop.cards.action;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.game.Player;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
+import sk.stuba.fei.uim.oop.cards.action.Shoot;
 
 import java.util.ArrayList;
 
@@ -38,15 +39,18 @@ public class WildBill extends ActionCard {
         return -1;
     }
 
+
+
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         int index;
         int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
         if (this.board.get(position).getName().startsWith("Duck")) {
+            index = findOwnerIndex(this.board.get(position).getOwner());
+            boardDeck.add(board.get(position));
             board.remove(position);
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
-            index = findOwnerIndex(this.board.get(position).getOwner());
             players[index].loseHealth();
 
         }

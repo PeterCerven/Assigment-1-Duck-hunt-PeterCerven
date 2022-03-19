@@ -26,7 +26,7 @@ public class DuckMarch extends ActionCard {
 
 
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         boardDeck.add(board.get(0));
         board.remove(0);
         board.add(boardDeck.get(0));

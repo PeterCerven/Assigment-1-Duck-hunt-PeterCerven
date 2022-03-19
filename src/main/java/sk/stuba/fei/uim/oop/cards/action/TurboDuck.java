@@ -29,7 +29,7 @@ public class TurboDuck extends ActionCard {
 
 
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         int position = KeyboardInput.readInt("Choose postition:") - 1;
         boardDeck.add(0, board.get(position));
         board.remove(position);

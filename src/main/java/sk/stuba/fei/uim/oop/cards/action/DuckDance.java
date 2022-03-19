@@ -28,7 +28,7 @@ public class DuckDance extends ActionCard {
 
 
     @Override
-    public void action(int currentPlayer) {
+    public void action() {
         boardDeck.addAll(board);
         board.clear();
         Collections.shuffle(boardDeck);
