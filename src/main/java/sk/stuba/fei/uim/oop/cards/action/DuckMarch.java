@@ -31,5 +31,6 @@ public class DuckMarch extends ActionCard {
         board.remove(0);
         board.add(boardDeck.get(0));
         boardDeck.remove(0);
+        System.out.println(getName() + " was played.");
     }
 }

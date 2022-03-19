@@ -23,7 +23,7 @@ public class Player {
 
     public void loseHealth() {
         hitPoints--;
-        System.out.println(this.name + "has left " + this.hitPoints + " ducks");
+        System.out.println(this.name + " has left " + this.hitPoints + " ducks");
         if (hitPoints == 0) {
             dead();
         }
@@ -38,6 +38,7 @@ public class Player {
     }
 
     public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){
+        System.out.println(cardsToUse.get(chooseCard) + " was thrown away.");
         actionDeck.add(cardsToUse.get(chooseCard));
         cardsToUse.remove(chooseCard);
     }

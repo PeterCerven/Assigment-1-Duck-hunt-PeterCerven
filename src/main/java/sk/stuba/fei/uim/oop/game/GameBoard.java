@@ -107,23 +107,23 @@ public class GameBoard {
                 }
             }
             if (Arrays.stream(usableCards).sum() > 0) {
-                chooseCard = KeyboardInput.readInt("Choose card, any card can use");
+                chooseCard = KeyboardInput.readInt("Choose card, 1-3");
                 while (!contains(usableCards, chooseCard)) {
-                    chooseCard = KeyboardInput.readInt("Choose another one");
+                    chooseCard = KeyboardInput.readInt("Choose another card");
                 }
                 players[currentPlayer].playCard(chooseCard);
                 actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
                 players[currentPlayer].cardsToUse.remove(chooseCard - 1);
             } else {
-                chooseCard = KeyboardInput.readInt("Choose card, any card to throw");
+                chooseCard = KeyboardInput.readInt("Choose card to throw away");
                 players[currentPlayer].throwAwayCard(chooseCard - 1, actionDeck);
             }
 
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
 
+            System.out.println("----------------------------------");
             nextPlayer();
-
 
         }
         System.out.println("The winner is " + winner());
@@ -149,9 +149,13 @@ public class GameBoard {
     }
 
     private void boardPrint() {
-        System.out.println("Board is:");
+        System.out.println("Board:");
         for (int i = 0; i < board.size(); i++) {
-            System.out.print((i+1) + " " + aimers[i]);
+            if (aimers[i]){
+                System.out.print((i+1) + " aimed");
+            } else {
+                System.out.print((i+1) + " not aimed");
+            }
             System.out.println(" " + board.get(i).getName());
         }
     }

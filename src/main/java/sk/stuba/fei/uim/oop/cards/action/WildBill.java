@@ -52,6 +52,7 @@ public class WildBill extends ActionCard {
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
             players[index].loseHealth();
+            System.out.println(players[index].name + "'s Duck was shot on position" + (position + 1));
 
         }
         aimers[position] = false;

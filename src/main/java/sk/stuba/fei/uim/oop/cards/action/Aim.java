@@ -31,6 +31,7 @@ public class Aim extends ActionCard {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
+        System.out.println(getName() + " was played on position " + (position + 1));
         aimers[position] = true;
     }
 

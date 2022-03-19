@@ -27,5 +27,6 @@ public class Scatter extends ActionCard {
     @Override
     public void action() {
         Collections.shuffle(board);
+        System.out.println(getName() + " was played.");
     }
 }

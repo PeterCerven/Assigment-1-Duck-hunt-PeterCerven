@@ -36,6 +36,7 @@ public class DuckDance extends ActionCard {
             board.add(boardDeck.get(i));
         }
         boardDeck.subList(0, 6).clear();
+        System.out.println(getName() + " was played.");
     }
 
 }
