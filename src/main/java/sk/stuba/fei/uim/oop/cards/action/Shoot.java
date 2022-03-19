@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop.cards.action;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.game.Player;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
-import sk.stuba.fei.uim.oop.game.GameBoard;
 
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class Shoot extends ActionCard {
     boolean[] aimers;
     ArrayList<NonActionCard> board;
     ArrayList<NonActionCard> boardDeck;
-    private Player[] players;
+    private final Player[] players;
 
     public Shoot(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
         this.aimers = aimers;
@@ -52,7 +51,7 @@ public class Shoot extends ActionCard {
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
             players[index].loseHealth();
-            System.out.println(players[index].name + "'s Duck was shot on position" + (position + 1));
+            System.out.println(players[index].name + "'s Duck was shot on position " + (position + 1));
 
         }
         aimers[position] = false;

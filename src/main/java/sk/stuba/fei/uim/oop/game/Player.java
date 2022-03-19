@@ -1,7 +1,7 @@
 package sk.stuba.fei.uim.oop.game;
 
 import sk.stuba.fei.uim.oop.cards.action.ActionCard;
-import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
+
 
 
 import java.util.ArrayList;

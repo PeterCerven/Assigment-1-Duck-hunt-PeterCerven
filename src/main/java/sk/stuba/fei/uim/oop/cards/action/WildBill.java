@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop.cards.action;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.game.Player;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
-import sk.stuba.fei.uim.oop.cards.action.Shoot;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class WildBill extends ActionCard {
     boolean[] aimers;
     ArrayList<NonActionCard> board;
     ArrayList<NonActionCard> boardDeck;
-    private Player[] players;
+    private final Player[] players;
 
     public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
         this.aimers = aimers;

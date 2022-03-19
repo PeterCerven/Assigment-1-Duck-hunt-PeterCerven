@@ -1,7 +1,6 @@
 package sk.stuba.fei.uim.oop.cards.action;
 
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
-import sk.stuba.fei.uim.oop.game.Player;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 import java.util.ArrayList;

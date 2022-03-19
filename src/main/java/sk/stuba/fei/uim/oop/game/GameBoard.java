@@ -94,7 +94,7 @@ public class GameBoard {
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
             boardPrint();
-            System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are");
+            System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
             for (int i = 0; i < 3; i++) {
                 if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
                     System.out.println((i + 1) + " " + this.players[currentPlayer].cardsToUse.get(i).getName());
@@ -151,12 +151,13 @@ public class GameBoard {
     private void boardPrint() {
         System.out.println("Board:");
         for (int i = 0; i < board.size(); i++) {
-            if (aimers[i]){
-                System.out.print((i+1) + " aimed");
+            if (aimers[i]) {
+                System.out.print(ANSI_RED + (i + 1) + " aimed");
+                System.out.println(" " + board.get(i).getName()+ ANSI_RESET);
             } else {
-                System.out.print((i+1) + " not aimed");
+                System.out.print((i + 1) + " not aimed");
+                System.out.println(" " + board.get(i).getName());
             }
-            System.out.println(" " + board.get(i).getName());
         }
     }
 
