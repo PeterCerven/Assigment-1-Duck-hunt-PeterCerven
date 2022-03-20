@@ -6,7 +6,7 @@ public class Duck extends NonActionCard {
 
 
     public Duck(String name) {
-        this.name = "Duck " + name;
+        this.name = name + "'s Duck";
         this.owner = name;
     }
     @Override

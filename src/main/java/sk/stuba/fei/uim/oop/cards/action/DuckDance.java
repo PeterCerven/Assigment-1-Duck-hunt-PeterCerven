@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DuckDance extends ActionCard {
-    ArrayList<NonActionCard> board;
-    ArrayList<NonActionCard> boardDeck;
+    private final ArrayList<NonActionCard> board;
+    private final ArrayList<NonActionCard> boardDeck;
 
 
     public DuckDance(ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {

@@ -11,21 +11,21 @@ public class Player {
     private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
-    private ArrayList<ActionCard> actionDeck;
+    private final ArrayList<ActionCard> actionDeck;
 
     public Player(String name , ArrayList<ActionCard> actionDeck) {
         this.name = name;
         this.alive = true;
         this.cardsToUse = new ArrayList<>();
         hitPoints = 5;
-        this.actionDeck = new ArrayList<>();
+        this.actionDeck = actionDeck;
 
     }
 
 
     public void loseHealth() {
         hitPoints--;
-        System.out.println(this.name + " has left " + this.hitPoints + " ducks");
+        System.out.println("Number of ducks left for " + this.name + " is " + this.hitPoints + ".");
         if (hitPoints == 0) {
             dead();
         }
@@ -39,9 +39,9 @@ public class Player {
         this.cardsToUse.get(cardNumber - 1).action();
     }
 
-    public void throwAwayCard(int chooseCard,  ArrayList<ActionCard> actionDeck){
-        System.out.println(cardsToUse.get(chooseCard) + " was thrown away.");
-        actionDeck.add(cardsToUse.get(chooseCard));
+    public void throwAwayCard(int chooseCard){
+        System.out.println(cardsToUse.get(chooseCard).getName() + " was thrown away.");
+        this.actionDeck.add(cardsToUse.get(chooseCard));
         cardsToUse.remove(chooseCard);
     }
 

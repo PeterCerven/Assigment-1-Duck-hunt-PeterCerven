@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Shoot extends ActionCard {
     boolean[] aimers;
-    ArrayList<NonActionCard> board;
-    ArrayList<NonActionCard> boardDeck;
+    private final ArrayList<NonActionCard> board;
+    private final ArrayList<NonActionCard> boardDeck;
     private final Player[] players;
 
     public Shoot(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
@@ -27,14 +27,14 @@ public class Shoot extends ActionCard {
 
     @Override
     public boolean playable() {
-        for(boolean b : this.aimers) {
+        for (boolean b : this.aimers) {
             if (b) return true;
         }
         return false;
     }
 
-    public int findOwnerIndex(String owner){
-        for (int i = 0; i < players.length; i++){
+    public int findOwnerIndex(String owner) {
+        for (int i = 0; i < players.length; i++) {
             if (players[i].name.equals(owner)) {
                 return i;
             }
@@ -42,28 +42,24 @@ public class Shoot extends ActionCard {
         return -1;
     }
 
-    public void killDuck(int position){
-        int index;
-        if (this.board.get(position).getName().startsWith("Duck")) {
-            index = findOwnerIndex(this.board.get(position).getOwner());
-            boardDeck.add(board.get(position));
-            board.remove(position);
-            board.add(boardDeck.get(0));
-            boardDeck.remove(0);
-            players[index].loseHealth();
-            System.out.println(players[index].name + "'s Duck was shot on position " + (position + 1));
-
-        }
-        aimers[position] = false;
-    }
-
-
     @Override
     public void action() {
-        int position = KeyboardInput.readInt("Choose position") - 1;
-        while (!aimers[position]){
-            position = KeyboardInput.readInt("Choose another one") - 1;
+        int position = KeyboardInput.readInt("Choose position to shoot") - 1;
+        while (!aimers[position]) {
+            position = KeyboardInput.readInt("Can't shoot there, try again!") - 1;
         }
-        killDuck(position);
+        int index;
+        if (this.board.get(position).getName().contains("Duck")) {
+            index = findOwnerIndex(this.board.get(position).getOwner());
+            this.board.remove(position);
+            this.board.add(boardDeck.get(0));
+            this.boardDeck.remove(0);
+            System.out.println(players[index].name + "'s Duck was shot on position " + (position + 1));
+            this.players[index].loseHealth();
+
+        } else {
+            System.out.println(this.board.get(position).getName() + " was shoot on position " + (position + 1));
+        }
+        aimers[position] = false;
     }
 }

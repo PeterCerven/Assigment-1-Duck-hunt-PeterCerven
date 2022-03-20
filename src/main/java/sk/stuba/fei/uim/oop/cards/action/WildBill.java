@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class WildBill extends ActionCard {
     boolean[] aimers;
-    ArrayList<NonActionCard> board;
-    ArrayList<NonActionCard> boardDeck;
+    private final ArrayList<NonActionCard> board;
+    private final ArrayList<NonActionCard> boardDeck;
     private final Player[] players;
 
     public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
@@ -29,8 +29,8 @@ public class WildBill extends ActionCard {
         return true;
     }
 
-    public int findOwnerIndex(String owner){
-        for (int i = 0; i < players.length; i++){
+    public int findOwnerIndex(String owner) {
+        for (int i = 0; i < players.length; i++) {
             if (players[i].name.equals(owner)) {
                 return i;
             }
@@ -39,20 +39,20 @@ public class WildBill extends ActionCard {
     }
 
 
-
     @Override
     public void action() {
         int index;
         int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
-        if (this.board.get(position).getName().startsWith("Duck")) {
+        if (this.board.get(position).getName().contains("Duck")) {
             index = findOwnerIndex(this.board.get(position).getOwner());
-            boardDeck.add(board.get(position));
             board.remove(position);
             board.add(boardDeck.get(0));
             boardDeck.remove(0);
+            System.out.println(players[index].name + "'s Duck was shot on position " + (position + 1) + ".");
             players[index].loseHealth();
-            System.out.println(players[index].name + "'s Duck was shot on position" + (position + 1));
 
+        } else {
+            System.out.println(this.board.get(position).getName() + " was shoot on position " + (position + 1) + ".");
         }
         aimers[position] = false;
 

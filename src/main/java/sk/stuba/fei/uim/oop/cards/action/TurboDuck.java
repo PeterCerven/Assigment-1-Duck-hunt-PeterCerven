@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class TurboDuck extends ActionCard {
     boolean[] aimers;
-    ArrayList<NonActionCard> board;
-    ArrayList<NonActionCard> boardDeck;
+    private final ArrayList<NonActionCard> board;
+    private final ArrayList<NonActionCard> boardDeck;
 
     public TurboDuck(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.aimers = aimers;
@@ -23,19 +23,14 @@ public class TurboDuck extends ActionCard {
 
     @Override
     public boolean playable() {
-        for (NonActionCard nonActionCard : board) {
-            if (nonActionCard.getName().startsWith("Duck")) {
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
 
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position:") - 1;
-        while (!board.get(position).getName().startsWith("Duck")){
+        while (!board.get(position).getName().startsWith("Duck")) {
             position = KeyboardInput.readInt("Choose another position:") - 1;
         }
         boardDeck.add(0, board.get(position));
