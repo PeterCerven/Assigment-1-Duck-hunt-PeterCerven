@@ -26,11 +26,13 @@ public class GameBoard {
 
 
     public GameBoard() {
-        System.out.println("Welcome to DUCK INVASION");
-        int numberPlayers = KeyboardInput.readInt("Enter number of players between 2 and 6", 5);
+        System.out.println("Welcome to DUCK INVASION!!!");
+
+        int numberPlayers = KeyboardInput.readInt("Enter the number of players between 2 and 6", 5);
         while (!(numberPlayers > 1 && numberPlayers < 7)) {
-            numberPlayers = KeyboardInput.readInt("Between 2 and 6!");
+            numberPlayers = KeyboardInput.readInt("Between 2 and 6!",5);
         }
+
         this.players = new Player[numberPlayers];
         actionDeck = new ArrayList<>();
         for (int i = 0; i < numberPlayers; i++) {
@@ -70,14 +72,14 @@ public class GameBoard {
         this.actionDeck.addAll(Collections.nCopies(6, duckMarch));
         Scatter scatter = new Scatter(this.board);
         this.actionDeck.addAll(Collections.nCopies(2, scatter));
-        TurboDuck turboDuck = new TurboDuck(this.aimers, this.board, this.boardDeck);
+        TurboDuck turboDuck = new TurboDuck(this.board, this.boardDeck);
         this.actionDeck.add(turboDuck);
         DuckDance duckDance = new DuckDance(this.board, this.boardDeck);
         this.actionDeck.add(duckDance);
         Collections.shuffle(this.actionDeck);
     }
 
-    public void initializeBoard() {
+    private void initializeBoard() {
         for (int i = 0; i < 6; i++) {
             this.board.add(this.boardDeck.get(i));
         }
@@ -97,8 +99,10 @@ public class GameBoard {
         int chooseCard;
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
+            System.out.println("----------------------------------------");
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
+            //checking and printing usable cards and printing with red color unusable cards
             for (int i = 0; i < 3; i++) {
                 if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
                     System.out.println((i + 1) + ". - " + this.players[currentPlayer].cardsToUse.get(i).getName());
@@ -110,23 +114,25 @@ public class GameBoard {
                     usableCards[i] = 0;
                 }
             }
+            //deciding if playing a card or throwing a card
             if (Arrays.stream(usableCards).sum() > 0) {
                 chooseCard = KeyboardInput.readInt("Choose card, 1-3");
                 while (!contains(usableCards, chooseCard)) {
                     chooseCard = KeyboardInput.readInt("Not valid, choose another");
                 }
+                //playing a card
                 players[currentPlayer].playCard(chooseCard);
                 actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
                 players[currentPlayer].cardsToUse.remove(chooseCard - 1);
             } else {
+                //throwing a card
                 chooseCard = KeyboardInput.readInt("Choose card to throw away");
                 players[currentPlayer].throwAwayCard(chooseCard - 1);
             }
 
+            //drawing a card from deck
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
-
-            System.out.println("----------------------------------------");
             nextPlayer();
 
         }

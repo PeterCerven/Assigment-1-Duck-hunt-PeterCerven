@@ -6,12 +6,8 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 import java.util.ArrayList;
 
 public class TurboDuck extends ActionCard {
-    boolean[] aimers;
-    private final ArrayList<NonActionCard> board;
-    private final ArrayList<NonActionCard> boardDeck;
 
-    public TurboDuck(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
-        this.aimers = aimers;
+    public TurboDuck( ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.board = board;
         this.boardDeck = boardDeck;
     }

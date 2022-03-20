@@ -4,8 +4,6 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 
 public class Aim extends ActionCard {
-    boolean[] aimers;
-
 
     public Aim(boolean[] aimers) {
         this.aimers = aimers;

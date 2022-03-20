@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Scatter extends ActionCard {
-    private final ArrayList<NonActionCard> board;
 
     public Scatter(ArrayList<NonActionCard> board) {
         this.board = board;

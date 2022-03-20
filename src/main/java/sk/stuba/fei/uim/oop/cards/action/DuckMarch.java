@@ -5,8 +5,6 @@ import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import java.util.ArrayList;
 
 public class DuckMarch extends ActionCard {
-    private final ArrayList<NonActionCard> board;
-    private final ArrayList<NonActionCard> boardDeck;
 
     public DuckMarch( ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.board = board;
