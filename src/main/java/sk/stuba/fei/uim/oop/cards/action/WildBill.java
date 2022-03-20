@@ -6,14 +6,12 @@ import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 import java.util.ArrayList;
 
-public class WildBill extends ActionCard{
+public class WildBill extends Shoot {
 
     public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
-        this.aimers = aimers;
-        this.board = board;
-        this.boardDeck = boardDeck;
-        this.players = players;
+        super(aimers, board, boardDeck, players);
     }
+
 
     @Override
     public String getName() {
@@ -28,7 +26,7 @@ public class WildBill extends ActionCard{
 
     @Override
     public void action() {
-        int position = KeyboardInput.readInt("Choose postition between 1 and 6") - 1;
+        int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
         shootPosition(position);
         aimers[position] = false;
 
