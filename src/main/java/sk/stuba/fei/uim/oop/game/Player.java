@@ -11,14 +11,14 @@ public class Player {
     private boolean alive;
     public ArrayList<ActionCard> cardsToUse;
     private int hitPoints;
+    private final ArrayList<ActionCard> actionDeck;
 
-
-    public Player(String name) {
+    public Player(String name, ArrayList<ActionCard> actionDeck) {
         this.name = name;
         this.alive = true;
         this.cardsToUse = new ArrayList<>();
-        hitPoints = 5;
-
+        this.hitPoints = 5;
+        this.actionDeck = actionDeck;
 
     }
 

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public class Shoot extends ActionCard {
 
-    public Shoot(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
+    public Shoot(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck,
+                 Player[] players) {
         this.aimers = aimers;
         this.board = board;
         this.boardDeck = boardDeck;
@@ -55,8 +56,8 @@ public class Shoot extends ActionCard {
 
     @Override
     public void action() {
-        int position = KeyboardInput.readInt("Choose position to shoot") - 1;
-        while (!aimers[position]) {
+        int position = KeyboardInput.readInt("Choose position to shoot", 5) - 1;
+        while (!(position > -1 && position < 6) || !aimers[position]) {
             position = KeyboardInput.readInt("Can't shoot there, try again!") - 1;
         }
         shootPosition(position);

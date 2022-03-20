@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class WildBill extends Shoot {
 
-    public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck, Player[] players) {
+    public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck,
+                    Player[] players) {
         super(aimers, board, boardDeck, players);
     }
 
@@ -26,7 +27,10 @@ public class WildBill extends Shoot {
 
     @Override
     public void action() {
-        int position = KeyboardInput.readInt("Choose position between 1 and 6") - 1;
+        int position = KeyboardInput.readInt("Choose position between 1 and 6", 5) - 1;
+        while(!(position > -1 && position < 6)){
+            position = KeyboardInput.readInt("Not valid position, choose another") - 1;
+        }
         shootPosition(position);
         aimers[position] = false;
 

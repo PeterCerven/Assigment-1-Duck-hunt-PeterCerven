@@ -26,23 +26,24 @@ public class GameBoard {
 
 
     public GameBoard() {
-        System.out.println("Welcome to DUCK INVASION!!!");
-
-        int numberPlayers = KeyboardInput.readInt("Enter the number of players between 2 and 6", 5);
-        while (!(numberPlayers > 1 && numberPlayers < 7)) {
-            numberPlayers = KeyboardInput.readInt("Between 2 and 6!",5);
-        }
-
-        this.players = new Player[numberPlayers];
-        actionDeck = new ArrayList<>();
-        for (int i = 0; i < numberPlayers; i++) {
-            this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name"));
-        }
         this.currentPlayer = 0;
         boardDeck = new ArrayList<>();
         board = new ArrayList<>();
         aimers = new boolean[6];
         usableCards = new int[3];
+        actionDeck = new ArrayList<>();
+        System.out.println("Welcome to DUCK INVASION!!!");
+
+        int numberPlayers = KeyboardInput.readInt("Enter the number of players between 2 and 6",
+                5);
+        while (!(numberPlayers > 1 && numberPlayers < 7)) {
+            numberPlayers = KeyboardInput.readInt("Between 2 and 6!",5);
+        }
+        this.players = new Player[numberPlayers];
+        for (int i = 0; i < numberPlayers; i++) {
+            this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name"),
+            actionDeck);
+        }
         this.initializeDecks();
         this.initializeBoard();
         this.initializeHands();
@@ -100,7 +101,7 @@ public class GameBoard {
         while (playersLeft() > 1) {
             System.out.println("----------------------------------------");
             boardPrint();
-            System.out.println("\nThis is " + this.players[currentPlayer].name + " turn and his cards are:");
+            System.out.println("\nThis is " + this.players[currentPlayer].name + "'s turn and his cards are:");
             //checking and printing usable cards and printing with red color unusable cards
             for (int i = 0; i < 3; i++) {
                 if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
