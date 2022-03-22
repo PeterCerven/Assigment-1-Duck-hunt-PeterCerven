@@ -18,6 +18,7 @@ public class GameBoard {
 
     private final Player[] players;
     private int currentPlayer;
+    private int roundCounter;
     private final ArrayList<NonActionCard> boardDeck;
     private final ArrayList<ActionCard> actionDeck;
     private final ArrayList<NonActionCard> board;
@@ -26,6 +27,7 @@ public class GameBoard {
 
 
     public GameBoard() {
+        roundCounter = 0;
         this.currentPlayer = 0;
         boardDeck = new ArrayList<>();
         board = new ArrayList<>();
@@ -99,10 +101,10 @@ public class GameBoard {
         int chooseCard;
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
-            System.out.println("----------------------------------------");
+            System.out.println("-------------------Round " + (roundCounter / playersLeft() + 1)  + "---------------------");
             boardPrint();
             System.out.println("\nThis is " + this.players[currentPlayer].name + "'s turn and his cards are:");
-            //checking and printing usable cards and printing with red color unusable cards
+            //checking and printing usable cards and printing with red color unusable ones
             for (int i = 0; i < 3; i++) {
                 if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
                     System.out.println((i + 1) + ". - " + this.players[currentPlayer].cardsToUse.get(i).getName());
@@ -122,6 +124,12 @@ public class GameBoard {
                 }
                 //playing a card
                 players[currentPlayer].playCard(chooseCard);
+                //needed if player kills himself
+                if (!players[currentPlayer].isAlive()) {
+                    currentPlayer = nextPlayer();
+                    roundCounter++;
+                    continue;
+                }
                 actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
                 players[currentPlayer].cardsToUse.remove(chooseCard - 1);
             } else {
@@ -133,7 +141,8 @@ public class GameBoard {
             //drawing a card from deck
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
-            nextPlayer();
+            currentPlayer = nextPlayer();
+            roundCounter++;
 
         }
         System.out.println("The winner is " + winner());
@@ -171,13 +180,14 @@ public class GameBoard {
         }
     }
 
-    private void nextPlayer() {
+    private int nextPlayer() {
         this.currentPlayer++;
         this.currentPlayer %= this.players.length;
         if (!this.players[this.currentPlayer].isAlive()) {
             this.currentPlayer++;
             this.currentPlayer %= this.players.length;
         }
+        return  currentPlayer;
     }
 
     private String winner() {
@@ -188,4 +198,6 @@ public class GameBoard {
         }
         return null;
     }
+
+
 }

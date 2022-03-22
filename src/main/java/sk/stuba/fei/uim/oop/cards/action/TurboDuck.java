@@ -26,7 +26,7 @@ public class TurboDuck extends ActionCard {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position:", 5) - 1;
-        while (!(position > -1 && position < 6) || !board.get(position).getName().contains("Duck")) {
+        while (!(position >= 0 && position <= 5) || !board.get(position).getName().contains("Duck")) {
             position = KeyboardInput.readInt("Choose another position:") - 1;
         }
         boardDeck.add(0, board.get(position));

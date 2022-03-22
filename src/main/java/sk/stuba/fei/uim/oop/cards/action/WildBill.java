@@ -28,7 +28,7 @@ public class WildBill extends Shoot {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position between 1 and 6", 5) - 1;
-        while(!(position > -1 && position < 6)){
+        while(!(position >= 0 && position <= 5)){
             position = KeyboardInput.readInt("Not valid position, choose another") - 1;
         }
         shootPosition(position);

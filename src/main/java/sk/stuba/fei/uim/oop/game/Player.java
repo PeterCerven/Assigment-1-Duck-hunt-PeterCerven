@@ -48,9 +48,9 @@ public class Player {
 
     public void dead() {
         System.out.println("Player " + this.name + " lost all his ducks.");
-        this.alive = false;
         actionDeck.addAll(cardsToUse);
         cardsToUse.clear();
+        this.alive = false;
 
     }
 

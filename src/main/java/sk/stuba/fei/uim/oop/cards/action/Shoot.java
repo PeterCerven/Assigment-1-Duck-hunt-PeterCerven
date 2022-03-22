@@ -57,7 +57,7 @@ public class Shoot extends ActionCard {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position to shoot", 5) - 1;
-        while (!(position > -1 && position < 6) || !aimers[position]) {
+        while (!(position >= 0 && position <= 5) || !aimers[position]) {
             position = KeyboardInput.readInt("Can't shoot there, try again!") - 1;
         }
         shootPosition(position);

@@ -26,7 +26,7 @@ public class Aim extends ActionCard {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position between 1 and 6", 5) - 1;
-        while(!(position > -1 && position < 6) || !aimers[position]){
+        while(!(position >= 0 && position <= 5) || aimers[position]){
             position = KeyboardInput.readInt("Not valid position, choose another") - 1;
         }
         System.out.println(getName() + " was played on position " + (position + 1));
