@@ -5,9 +5,10 @@ import sk.stuba.fei.uim.oop.game.Player;
 public class Duck extends NonActionCard {
 
 
-    public Duck(Player player) {
+
+    public Duck(Player owner) {
         this.name = "Duck";
-        this.owner = player;
+        this.owner = owner;
     }
     @Override
     public Player getOwner() {

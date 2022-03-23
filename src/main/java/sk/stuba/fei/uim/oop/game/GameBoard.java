@@ -34,7 +34,7 @@ public class GameBoard {
         aimers = new boolean[6];
         usableCards = new int[3];
         actionDeck = new ArrayList<>();
-        System.out.println("Welcome to DUCK INVASION!!!");
+        System.out.println("Welcome to DUCK HUNT!!!");
 
         int numberPlayers = KeyboardInput.readInt("Enter the number of players between 2 and 6",
                 5);
@@ -59,7 +59,8 @@ public class GameBoard {
             Duck duck = new Duck(player);
             this.boardDeck.addAll(Collections.nCopies(5, duck));
         }
-        EmptyWater emptyWater = new EmptyWater();
+        Player emptyPlayer = new Player("Empty", this.actionDeck);
+        EmptyWater emptyWater = new EmptyWater(emptyPlayer);
         this.boardDeck.addAll(Collections.nCopies(5, emptyWater));
         Collections.shuffle(this.boardDeck);
 
@@ -172,10 +173,10 @@ public class GameBoard {
         for (int i = 0; i < board.size(); i++) {
             if (aimers[i]) {
                 System.out.print(ANSI_RED + (i + 1) + ". aimed");
-                System.out.println(" " + board.get(i).getName()+ ANSI_RESET);
+                System.out.println(" " + board.get(i).getOwner().name + " " + board.get(i).getName()+ ANSI_RESET);
             } else {
                 System.out.print((i + 1) + ". not aimed");
-                System.out.println(" " + board.get(i).getName());
+                System.out.println(" " + board.get(i).getOwner().name + " " + board.get(i).getName());
             }
         }
     }

@@ -9,5 +9,4 @@ public abstract class NonActionCard {
     public abstract String getName();
 
     public abstract Player getOwner();
-
 }

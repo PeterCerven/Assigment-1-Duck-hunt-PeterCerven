@@ -3,10 +3,12 @@ package sk.stuba.fei.uim.oop.cards.nonaction;
 import sk.stuba.fei.uim.oop.game.Player;
 
 public class EmptyWater extends NonActionCard {
-    private final String name;
 
-    public EmptyWater() {
+
+
+    public EmptyWater(Player owner) {
         this.name = "Water";
+        this.owner = owner;
     }
 
     @Override
@@ -16,6 +18,6 @@ public class EmptyWater extends NonActionCard {
 
     @Override
     public Player getOwner() {
-        return null;
+        return owner;
     }
 }
