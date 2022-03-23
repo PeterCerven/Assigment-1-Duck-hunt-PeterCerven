@@ -1,5 +1,7 @@
 package sk.stuba.fei.uim.oop.cards.nonaction;
 
+import sk.stuba.fei.uim.oop.game.Player;
+
 public class EmptyWater extends NonActionCard {
     private final String name;
 
@@ -13,7 +15,7 @@ public class EmptyWater extends NonActionCard {
     }
 
     @Override
-    public String getOwner() {
+    public Player getOwner() {
         return null;
     }
 }

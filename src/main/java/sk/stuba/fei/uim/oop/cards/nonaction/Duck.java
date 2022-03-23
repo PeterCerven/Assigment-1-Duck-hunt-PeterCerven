@@ -1,16 +1,16 @@
 package sk.stuba.fei.uim.oop.cards.nonaction;
 
+import sk.stuba.fei.uim.oop.game.Player;
+
 public class Duck extends NonActionCard {
-    private final String owner;
-    private final String name;
 
 
-    public Duck(String name) {
-        this.name = name + "'s Duck";
-        this.owner = name;
+    public Duck(Player player) {
+        this.name = "Duck";
+        this.owner = player;
     }
     @Override
-    public String getOwner() {
+    public Player getOwner() {
         return owner;
     }
 

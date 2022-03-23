@@ -11,6 +11,8 @@ public abstract class ActionCard {
     protected ArrayList<NonActionCard> board;
     protected ArrayList<NonActionCard> boardDeck;
 
+
+
     public abstract void action();
 
     public abstract String getName();

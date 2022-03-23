@@ -32,9 +32,9 @@ public class Shoot extends ActionCard {
         }
     }
 
-    protected int findOwnerIndex(String owner) {
+    protected int findOwnerIndex(Player owner) {
         for (int i = 0; i < players.length; i++) {
-            if (players[i].name.equals(owner)) {
+            if (players[i].equals(owner)) {
                 return i;
             }
         }

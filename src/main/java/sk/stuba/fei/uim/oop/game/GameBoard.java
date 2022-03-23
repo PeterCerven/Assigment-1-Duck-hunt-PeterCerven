@@ -56,7 +56,7 @@ public class GameBoard {
     private void initializeDecks() {
         //filling deck of non action cards
         for (Player player : players) {
-            Duck duck = new Duck(player.name);
+            Duck duck = new Duck(player);
             this.boardDeck.addAll(Collections.nCopies(5, duck));
         }
         EmptyWater emptyWater = new EmptyWater();
