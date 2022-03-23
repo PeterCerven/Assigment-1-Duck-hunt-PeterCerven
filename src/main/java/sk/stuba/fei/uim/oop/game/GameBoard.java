@@ -102,9 +102,9 @@ public class GameBoard {
         int chooseCard;
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
-            System.out.println("-------------------Round " + (roundCounter / playersLeft() + 1)  + "---------------------");
+            System.out.println("-------------------Round " + (roundCounter + 1)  + "---------------------");
             boardPrint();
-            System.out.println("\nThis is " + this.players[currentPlayer].name + "'s turn and his cards are:");
+            System.out.println("\nThis is " + this.players[currentPlayer].name + "'s turn and his/her cards are:");
             //checking and printing usable cards and printing with red color unusable ones
             for (int i = 0; i < 3; i++) {
                 if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
@@ -120,15 +120,14 @@ public class GameBoard {
             //deciding if playing a card or throwing a card
             if (Arrays.stream(usableCards).sum() > 0) {
                 chooseCard = KeyboardInput.readInt("Choose card, 1-3");
-                while (!contains(usableCards, chooseCard)) {
+                while (!contains(usableCards, chooseCard) || !(chooseCard >= 1 && chooseCard <= 3)) {
                     chooseCard = KeyboardInput.readInt("Not valid, choose another");
                 }
                 //playing a card
                 players[currentPlayer].playCard(chooseCard);
                 //needed if player kills himself
                 if (!players[currentPlayer].isAlive()) {
-                    currentPlayer = nextPlayer();
-                    roundCounter++;
+                    roundCounter = nextPlayer();
                     continue;
                 }
                 actionDeck.add(players[currentPlayer].cardsToUse.get(chooseCard - 1));
@@ -136,17 +135,19 @@ public class GameBoard {
             } else {
                 //throwing a card
                 chooseCard = KeyboardInput.readInt("Choose card to throw away");
+                while (!(chooseCard >= 1 && chooseCard <= 3)) {
+                    chooseCard = KeyboardInput.readInt("Not valid, choose another");
+                }
                 players[currentPlayer].throwAwayCard(chooseCard - 1);
             }
 
             //drawing a card from deck
             players[currentPlayer].drawCard(this.actionDeck.get(0));
             this.actionDeck.remove(0);
-            currentPlayer = nextPlayer();
-            roundCounter++;
+            roundCounter = nextPlayer();
 
         }
-        System.out.println("The winner is " + winner());
+        System.out.println("The winner is " + winner() + ".");
     }
 
     private int playersLeft() {
@@ -183,12 +184,18 @@ public class GameBoard {
 
     private int nextPlayer() {
         this.currentPlayer++;
+        if (this.currentPlayer == players.length){
+            roundCounter++;
+        }
         this.currentPlayer %= this.players.length;
-        if (!this.players[this.currentPlayer].isAlive()) {
+        while (!this.players[this.currentPlayer].isAlive()) {
             this.currentPlayer++;
+            if (this.currentPlayer == players.length){
+                roundCounter++;
+            }
             this.currentPlayer %= this.players.length;
         }
-        return  currentPlayer;
+        return this.roundCounter;
     }
 
     private String winner() {
