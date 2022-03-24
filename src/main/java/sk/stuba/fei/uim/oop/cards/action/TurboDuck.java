@@ -32,6 +32,7 @@ public class TurboDuck extends ActionCard {
         boardDeck.add(0, board.get(position));
         board.remove(position);
         board.add(0, boardDeck.get(0));
+        boardDeck.remove(0);
         System.out.println(getName() + " was played on position " + (position + 1));
     }
 }

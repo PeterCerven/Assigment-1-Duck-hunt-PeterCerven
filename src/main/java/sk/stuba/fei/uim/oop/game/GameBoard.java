@@ -102,6 +102,7 @@ public class GameBoard {
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
             System.out.println("-------------------Round " + (roundCounter + 1) + "---------------------");
+            playerHealth();
             boardPrint();
             System.out.println("\nThis is " + players[currentPlayer].name + "'s turn and his/her cards are:");
             //checking and printing usable cards and printing with red color unusable ones
@@ -147,6 +148,27 @@ public class GameBoard {
             }
         }
         return counter;
+    }
+
+    private void playerHealth() {
+        int counter;
+        System.out.print("\n");
+        for (Player player : players) {
+            counter = 0;
+            for (NonActionCard card : board) {
+                if (player.equals(card.getOwner())) {
+                    counter++;
+                }
+            }
+            for (NonActionCard card2 : boardDeck) {
+                if (player.equals(card2.getOwner())) {
+                    counter++;
+                }
+            }
+            System.out.println(player.name + " has " + counter +" Ducks");
+        }
+        System.out.print("\n");
+
     }
 
     private boolean contains(int[] usableCards, int chosenNumber) {
