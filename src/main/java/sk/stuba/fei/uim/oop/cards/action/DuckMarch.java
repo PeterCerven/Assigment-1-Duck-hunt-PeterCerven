@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DuckMarch extends ActionCard {
 
-    public DuckMarch( ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
+    public DuckMarch(ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.board = board;
         this.boardDeck = boardDeck;
     }

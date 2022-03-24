@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 
-
 public class GameBoard {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
@@ -39,47 +38,47 @@ public class GameBoard {
         int numberPlayers = KeyboardInput.readInt("Enter the number of players between 2 and 6",
                 5);
         while (!(numberPlayers > 1 && numberPlayers < 7)) {
-            numberPlayers = KeyboardInput.readInt("Between 2 and 6!",5);
+            numberPlayers = KeyboardInput.readInt("Between 2 and 6!", 5);
         }
         this.players = new Player[numberPlayers];
         for (int i = 0; i < numberPlayers; i++) {
             this.players[i] = new Player(KeyboardInput.readString("Enter PLAYER " + (i + 1) + " name"),
-            actionDeck);
+                    actionDeck);
         }
-        this.initializeDecks();
-        this.initializeBoard();
-        this.initializeHands();
-        this.gameStart();
+        initializeDecks();
+        initializeBoard();
+        initializeHands();
+        gameStart();
     }
 
 
     private void initializeDecks() {
         //filling deck of non action cards
         for (Player player : players) {
-            Duck duck = new Duck(player);
+            Duck duck = new Duck("Duck", player);
             this.boardDeck.addAll(Collections.nCopies(5, duck));
         }
-        Player emptyPlayer = new Player("Empty", this.actionDeck);
-        EmptyWater emptyWater = new EmptyWater(emptyPlayer);
+        Player emptyPlayer = new Player("Empty", actionDeck);
+        EmptyWater emptyWater = new EmptyWater("Water", emptyPlayer);
         this.boardDeck.addAll(Collections.nCopies(5, emptyWater));
-        Collections.shuffle(this.boardDeck);
+        Collections.shuffle(boardDeck);
 
         //filing deck of action cards
-        Aim aim = new Aim(this.aimers);
+        Aim aim = new Aim(aimers);
         this.actionDeck.addAll(Collections.nCopies(10, aim));
-        Shoot shoot = new Shoot(this.aimers, this.board, this.boardDeck, this.players);
+        Shoot shoot = new Shoot(aimers, players, board, boardDeck);
         this.actionDeck.addAll(Collections.nCopies(12, shoot));
-        WildBill wildBill = new WildBill(this.aimers, this.board, this.boardDeck, this.players);
+        WildBill wildBill = new WildBill(aimers, board, boardDeck, players);
         this.actionDeck.addAll(Collections.nCopies(2, wildBill));
-        DuckMarch duckMarch = new DuckMarch(this.board, this.boardDeck);
+        DuckMarch duckMarch = new DuckMarch(board, boardDeck);
         this.actionDeck.addAll(Collections.nCopies(6, duckMarch));
-        Scatter scatter = new Scatter(this.board);
+        Scatter scatter = new Scatter(board);
         this.actionDeck.addAll(Collections.nCopies(2, scatter));
-        TurboDuck turboDuck = new TurboDuck(this.board, this.boardDeck);
+        TurboDuck turboDuck = new TurboDuck(board, boardDeck);
         this.actionDeck.add(turboDuck);
-        DuckDance duckDance = new DuckDance(this.board, this.boardDeck);
+        DuckDance duckDance = new DuckDance(board, boardDeck);
         this.actionDeck.add(duckDance);
-        Collections.shuffle(this.actionDeck);
+        Collections.shuffle(actionDeck);
     }
 
     private void initializeBoard() {
@@ -92,8 +91,8 @@ public class GameBoard {
     private void initializeHands() {
         for (Player player : players) {
             for (int i = 0; i < 3; i++) {
-                player.cardsToUse.add(this.actionDeck.get(0));
-                this.actionDeck.remove(0);
+                player.cardsToUse.add(actionDeck.get(0));
+                actionDeck.remove(0);
             }
         }
     }
@@ -102,26 +101,16 @@ public class GameBoard {
         int chooseCard;
         System.out.println("Game has started!\n");
         while (playersLeft() > 1) {
-            System.out.println("-------------------Round " + (roundCounter + 1)  + "---------------------");
+            System.out.println("-------------------Round " + (roundCounter + 1) + "---------------------");
             boardPrint();
-            System.out.println("\nThis is " + this.players[currentPlayer].name + "'s turn and his/her cards are:");
+            System.out.println("\nThis is " + players[currentPlayer].name + "'s turn and his/her cards are:");
             //checking and printing usable cards and printing with red color unusable ones
-            for (int i = 0; i < 3; i++) {
-                if (this.players[currentPlayer].cardsToUse.get(i).playable()) {
-                    System.out.println((i + 1) + ". - " + this.players[currentPlayer].cardsToUse.get(i).getName());
-                    usableCards[i] = i + 1;
-
-                } else {
-                    System.out.println(ANSI_RED + (i + 1) + ". - " + this.players[currentPlayer].cardsToUse.get(i)
-                            .getName() + ANSI_RESET);
-                    usableCards[i] = 0;
-                }
-            }
+            usableCardsPrint();
             //deciding if playing a card or throwing a card
             if (Arrays.stream(usableCards).sum() > 0) {
-                chooseCard = KeyboardInput.readInt("Choose card, 1-3");
+                chooseCard = KeyboardInput.readInt("Choose card to play");
                 while (!contains(usableCards, chooseCard) || !(chooseCard >= 1 && chooseCard <= 3)) {
-                    chooseCard = KeyboardInput.readInt("Not valid, choose another");
+                    chooseCard = KeyboardInput.readInt("Not valid card, choose another");
                 }
                 //playing a card
                 players[currentPlayer].playCard(chooseCard);
@@ -142,12 +131,12 @@ public class GameBoard {
             }
 
             //drawing a card from deck
-            players[currentPlayer].drawCard(this.actionDeck.get(0));
-            this.actionDeck.remove(0);
+            players[currentPlayer].drawCard(actionDeck.get(0));
+            actionDeck.remove(0);
             roundCounter = nextPlayer();
 
         }
-        System.out.println("The winner is " + winner() + ".");
+        System.out.println("\nThe winner is " + winner() + "!");
     }
 
     private int playersLeft() {
@@ -174,7 +163,7 @@ public class GameBoard {
         for (int i = 0; i < board.size(); i++) {
             if (aimers[i]) {
                 System.out.print(ANSI_RED + (i + 1) + ". aimed");
-                System.out.println(" " + board.get(i).getOwner().name + " " + board.get(i).getName()+ ANSI_RESET);
+                System.out.println(" " + board.get(i).getOwner().name + " " + board.get(i).getName() + ANSI_RESET);
             } else {
                 System.out.print((i + 1) + ". not aimed");
                 System.out.println(" " + board.get(i).getOwner().name + " " + board.get(i).getName());
@@ -182,20 +171,34 @@ public class GameBoard {
         }
     }
 
+    private void usableCardsPrint() {
+        for (int i = 0; i < 3; i++) {
+            if (players[currentPlayer].cardsToUse.get(i).playable()) {
+                System.out.println((i + 1) + ". - " + players[currentPlayer].cardsToUse.get(i).getName());
+                usableCards[i] = i + 1;
+
+            } else {
+                System.out.println(ANSI_RED + (i + 1) + ". - " + players[currentPlayer].cardsToUse.get(i)
+                        .getName() + ANSI_RESET);
+                usableCards[i] = 0;
+            }
+        }
+    }
+
     private int nextPlayer() {
         this.currentPlayer++;
-        if (this.currentPlayer == players.length){
+        if (this.currentPlayer == players.length) {
             roundCounter++;
         }
-        this.currentPlayer %= this.players.length;
-        while (!this.players[this.currentPlayer].isAlive()) {
-            this.currentPlayer++;
-            if (this.currentPlayer == players.length){
+        this.currentPlayer %= players.length;
+        while (!players[currentPlayer].isAlive()) {
+            currentPlayer++;
+            if (currentPlayer == players.length) {
                 roundCounter++;
             }
-            this.currentPlayer %= this.players.length;
+            this.currentPlayer %= players.length;
         }
-        return this.roundCounter;
+        return roundCounter;
     }
 
     private String winner() {

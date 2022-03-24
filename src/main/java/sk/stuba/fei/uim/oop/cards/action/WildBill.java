@@ -10,7 +10,7 @@ public class WildBill extends Shoot {
 
     public WildBill(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck,
                     Player[] players) {
-        super(aimers, board, boardDeck, players);
+        super(aimers, players, boardDeck, board);
     }
 
 
@@ -28,7 +28,7 @@ public class WildBill extends Shoot {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position between 1 and 6", 5) - 1;
-        while(!(position >= 0 && position <= 5)){
+        while (!(position >= 0 && position <= 5)) {
             position = KeyboardInput.readInt("Not valid position, choose another") - 1;
         }
         shootPosition(position);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TurboDuck extends ActionCard {
 
-    public TurboDuck( ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
+    public TurboDuck(ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.board = board;
         this.boardDeck = boardDeck;
     }

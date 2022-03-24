@@ -5,10 +5,8 @@ import sk.stuba.fei.uim.oop.game.Player;
 public class EmptyWater extends NonActionCard {
 
 
-
-    public EmptyWater(Player owner) {
-        this.name = "Water";
-        this.owner = owner;
+    public EmptyWater(String name, Player owner) {
+        super(name, owner);
     }
 
     @Override

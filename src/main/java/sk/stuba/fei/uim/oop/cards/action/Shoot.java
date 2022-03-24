@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public class Shoot extends ActionCard {
 
-    public Shoot(boolean[] aimers, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck,
-                 Player[] players) {
+    public Shoot(boolean[] aimers, Player[] players, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.aimers = aimers;
         this.board = board;
         this.boardDeck = boardDeck;
         this.players = players;
     }
+
 
     protected void shootPosition(int position) {
         int index;

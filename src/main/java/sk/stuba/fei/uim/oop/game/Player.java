@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop.game;
 import sk.stuba.fei.uim.oop.cards.action.ActionCard;
 
 
-
 import java.util.ArrayList;
 
 public class Player {
@@ -39,7 +38,7 @@ public class Player {
         this.cardsToUse.get(cardNumber - 1).action();
     }
 
-    public void throwAwayCard(int chooseCard){
+    public void throwAwayCard(int chooseCard) {
         System.out.println(cardsToUse.get(chooseCard).getName() + " was thrown away.");
         this.actionDeck.add(cardsToUse.get(chooseCard));
         cardsToUse.remove(chooseCard);
