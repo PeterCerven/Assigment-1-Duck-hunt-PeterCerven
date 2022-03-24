@@ -154,18 +154,7 @@ public class GameBoard {
         int counter;
         System.out.print("\n");
         for (Player player : players) {
-            counter = 0;
-            for (NonActionCard card : board) {
-                if (player.equals(card.getOwner())) {
-                    counter++;
-                }
-            }
-            for (NonActionCard card2 : boardDeck) {
-                if (player.equals(card2.getOwner())) {
-                    counter++;
-                }
-            }
-            System.out.println(player.name + " has " + counter +" Ducks");
+            System.out.println(player.name + " has " + player.getHitPoints() +" Ducks");
         }
         System.out.print("\n");
 

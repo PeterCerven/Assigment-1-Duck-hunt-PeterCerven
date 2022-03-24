@@ -30,6 +30,10 @@ public class Player {
         }
     }
 
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
     public void drawCard(ActionCard card) {
         this.cardsToUse.add(card);
     }
