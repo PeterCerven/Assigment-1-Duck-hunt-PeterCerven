@@ -68,7 +68,7 @@ public class GameBoard {
         this.actionDeck.addAll(Collections.nCopies(10, aim));
         Shoot shoot = new Shoot(aimers, players, board, boardDeck);
         this.actionDeck.addAll(Collections.nCopies(12, shoot));
-        WildBill wildBill = new WildBill(aimers, board, boardDeck, players);
+        WildBill wildBill = new WildBill(aimers, players, board, boardDeck);
         this.actionDeck.addAll(Collections.nCopies(2, wildBill));
         DuckMarch duckMarch = new DuckMarch(board, boardDeck);
         this.actionDeck.addAll(Collections.nCopies(6, duckMarch));

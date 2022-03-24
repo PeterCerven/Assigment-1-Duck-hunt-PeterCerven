@@ -11,9 +11,9 @@ public class Shoot extends ActionCard {
 
     public Shoot(boolean[] aimers, Player[] players, ArrayList<NonActionCard> board, ArrayList<NonActionCard> boardDeck) {
         this.aimers = aimers;
+        this.players = players;
         this.board = board;
         this.boardDeck = boardDeck;
-        this.players = players;
     }
 
 
