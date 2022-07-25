@@ -1,5 +1,6 @@
 package sk.stuba.fei.uim.oop.cards.action;
 
+import sk.stuba.fei.uim.oop.cards.nonaction.Duck;
 import sk.stuba.fei.uim.oop.cards.nonaction.NonActionCard;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
@@ -26,7 +27,7 @@ public class TurboDuck extends ActionCard {
     @Override
     public void action() {
         int position = KeyboardInput.readInt("Choose position:", 5) - 1;
-        while (!(position >= 0 && position <= 5) || !board.get(position).getName().contains("Duck")) {
+        while (!(position >= 0 && position <= 5) || !(board.get(position) instanceof Duck)) {
             position = KeyboardInput.readInt("Choose another position:") - 1;
         }
         boardDeck.add(0, board.get(position));
